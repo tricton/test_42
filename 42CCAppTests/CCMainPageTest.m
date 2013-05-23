@@ -14,17 +14,20 @@ describe(@"Application should create a FMDB entity to work with database", ^{
         [db open];
         it(@" Database file must have one row with data",^{
             [db shouldNotBeNil];
+            [[appDelegate loadDataFromBase] shouldNotBeNil];
         });
         it(@"All fields for entity CCMe should be filled by appropriate data from database", ^{
-            [[CCMe myData].name shouldNotBeNil];
-            [[CCMe myData].surName shouldNotBeNil];
-            [[CCMe myData].birthDay shouldNotBeNil];
-            [[CCMe myData].biography shouldNotBeNil];
-            [[CCMe myData].address shouldNotBeNil];
-            [[CCMe myData].phone shouldNotBeNil];
-            [[CCMe myData].coordinates shouldNotBeNil];
-            [[CCMe myData].email shouldNotBeNil];
-            [[CCMe myData].myPhoto shouldNotBeNil];
+            if ([[appDelegate loadDataFromBase] next]){
+                [[[CCMe myData].name should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"name"]];
+                [[[CCMe myData].surName should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"surName"]] ;
+                [[[CCMe myData].birthDay should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"birthDay"]];
+                [[[CCMe myData].biography should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"biography"]];
+                [[[CCMe myData].address should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"address"]];
+                [[[CCMe myData].phone should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"phone"]];
+                [[[CCMe myData].coordinates should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"coordinates"]];
+                [[[CCMe myData].email should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"email"]];
+                [[[CCMe myData].myPhoto should] equal:[UIImage imageWithData:[[appDelegate loadDataFromBase] dataForColumn:@"photo"]]];
+            }
         });
     });
     context(@"TabBar controller must appear on the screen with one tab - Main", ^{

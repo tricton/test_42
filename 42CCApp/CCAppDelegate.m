@@ -44,7 +44,7 @@
     return [path stringByAppendingPathComponent:@"42base.sqlite"];
 }
 
--(void) loadDataFromBase{
+-(FMResultSet *) loadDataFromBase{
     NSFileManager *fManager = [NSFileManager defaultManager];
     NSString *workingPath = [self getPathToDatabase];
     [fManager fileExistsAtPath:workingPath];
@@ -66,6 +66,7 @@
         [CCMe myData].email = [result stringForColumn:@"email"];
         [CCMe myData].myPhoto = [UIImage imageWithData:[result dataForColumn:@"photo"]];
     }
+    return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

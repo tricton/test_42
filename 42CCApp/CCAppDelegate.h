@@ -16,6 +16,6 @@
 @property (nonatomic, strong) UITabBarController *tabBarController;
 
 -(NSString *) getPathToDatabase;
--(void) loadDataFromBase;
+-(FMResultSet *) loadDataFromBase;
 
 @end
