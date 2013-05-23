@@ -7,6 +7,7 @@
 //
 
 #import "CCAppDelegate.h"
+#import "CCMe.h"
 
 @implementation CCAppDelegate
 
@@ -42,7 +43,15 @@
     [db open];
     result = [db executeQuery:@"SELECT * FROM myData"];
     if ([result next]){
-        
+        [CCMe myData].name = [result stringForColumn:@"name"];
+        [CCMe myData].surName = [result stringForColumn:@"surName"];
+        [CCMe myData].birthDay = [result stringForColumn:@"birthDay"];
+        [CCMe myData].biography = [result stringForColumn:@"biography"];
+        [CCMe myData].address = [result stringForColumn:@"address"];
+        [CCMe myData].phone = [result stringForColumn:@"phone"];
+        [CCMe myData].coordinates = [result stringForColumn:@"coordinates"];
+        [CCMe myData].email = [result stringForColumn:@"email"];
+        [CCMe myData].myPhoto = [UIImage imageWithData:[result dataForColumn:@"photo"]];
     }
 }
 

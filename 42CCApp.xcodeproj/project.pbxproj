@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5FE478C6A779493180B55FB2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AF818AA1F94504B30C9EB6 /* libPods.a */; };
+		7E6EFF79174E10B800833991 /* 42base.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 7E6EFF78174E10B800833991 /* 42base.sqlite */; };
+		7E6EFF7C174E1A1800833991 /* CCMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6EFF7B174E1A1700833991 /* CCMe.m */; };
 		7EA8483C174DE461006FDB7B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA8483B174DE461006FDB7B /* UIKit.framework */; };
 		7EA8483E174DE461006FDB7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA8483D174DE461006FDB7B /* Foundation.framework */; };
 		7EA84840174DE461006FDB7B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA8483F174DE461006FDB7B /* CoreGraphics.framework */; };
@@ -37,6 +39,9 @@
 
 /* Begin PBXFileReference section */
 		07AF818AA1F94504B30C9EB6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E6EFF78174E10B800833991 /* 42base.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = 42base.sqlite; sourceTree = "<group>"; };
+		7E6EFF7A174E1A1700833991 /* CCMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMe.h; sourceTree = "<group>"; };
+		7E6EFF7B174E1A1700833991 /* CCMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMe.m; sourceTree = "<group>"; };
 		7EA84838174DE461006FDB7B /* 42CCApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 42CCApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA8483B174DE461006FDB7B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7EA8483D174DE461006FDB7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -122,6 +127,8 @@
 			children = (
 				7EA8484A174DE461006FDB7B /* CCAppDelegate.h */,
 				7EA8484B174DE461006FDB7B /* CCAppDelegate.m */,
+				7E6EFF7A174E1A1700833991 /* CCMe.h */,
+				7E6EFF7B174E1A1700833991 /* CCMe.m */,
 				7EA84842174DE461006FDB7B /* Supporting Files */,
 			);
 			path = 42CCApp;
@@ -130,6 +137,7 @@
 		7EA84842174DE461006FDB7B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7E6EFF78174E10B800833991 /* 42base.sqlite */,
 				7EA84843174DE461006FDB7B /* 42CCApp-Info.plist */,
 				7EA84844174DE461006FDB7B /* InfoPlist.strings */,
 				7EA84847174DE461006FDB7B /* main.m */,
@@ -239,6 +247,7 @@
 				7EA8484E174DE461006FDB7B /* Default.png in Resources */,
 				7EA84850174DE461006FDB7B /* Default@2x.png in Resources */,
 				7EA84852174DE461006FDB7B /* Default-568h@2x.png in Resources */,
+				7E6EFF79174E10B800833991 /* 42base.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +312,7 @@
 			files = (
 				7EA84848174DE461006FDB7B /* main.m in Sources */,
 				7EA8484C174DE461006FDB7B /* CCAppDelegate.m in Sources */,
+				7E6EFF7C174E1A1800833991 /* CCMe.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
