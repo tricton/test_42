@@ -29,8 +29,11 @@ describe(@"Application should create a FMDB entity to work with database", ^{
     });
     context(@"TabBar controller must appear on the screen with one tab - Main", ^{
         __block NSArray *controllers = [appDelegate tabBarController].viewControllers;
-        it(@"Main view controller should be add to tab bar controller's array",^{
+        UITabBarItem *item = [appDelegate tabBarController].tabBar.items[0];
+        it(@"Main view controller should be add to tab bar controller's array. Tab bar should have picture and title",^{
             [controllers[0] shouldNotBeNil];
+            [item.title shouldNotBeNil];
+            [item.image shouldNotBeNil];
         });
     });
 });
