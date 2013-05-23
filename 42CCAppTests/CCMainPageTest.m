@@ -16,6 +16,17 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             [db shouldNotBeNil];
             [[appDelegate loadDataFromBase] shouldNotBeNil];
         });
+        it(@"Allfields for entity CCMe should not be nil", ^{
+            [[CCMe myData].name shouldNotBeNil];
+            [[CCMe myData].surName shouldNotBeNil];
+            [[CCMe myData].birthDay shouldNotBeNil];
+            [[CCMe myData].biography shouldNotBeNil];
+            [[CCMe myData].address shouldNotBeNil];
+            [[CCMe myData].phone shouldNotBeNil];
+            [[CCMe myData].coordinates shouldNotBeNil];
+            [[CCMe myData].email shouldNotBeNil];
+            [[CCMe myData].myPhoto shouldNotBeNil];
+        });
         it(@"All fields for entity CCMe should be filled by appropriate data from database", ^{
             if ([[appDelegate loadDataFromBase] next]){
                 [[[CCMe myData].name should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"name"]];

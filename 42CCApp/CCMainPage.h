@@ -10,4 +10,6 @@
 
 @interface CCMainPage : UIViewController
 
+-(void) changeViewFrames:(UIInterfaceOrientation) orientation;
+
 @end
