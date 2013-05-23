@@ -12,9 +12,8 @@ describe(@"Application should create a FMDB entity to work with database", ^{
     context(@"Entity of FMDB must read database from file", ^{
         [db open];
         it(@" Database file must have one row with data", ^{
-
             FMResultSet *result = [db executeQuery:@"SELECT * FROM myData"];
-            
+            [result shouldNotBeNil];
         });
     });
 });
