@@ -7,6 +7,8 @@
 //
 
 #import "CCAppDelegate.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @implementation CCAppDelegate
 
@@ -17,6 +19,12 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(NSString *) getPathToDatabase{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = paths[0];
+    return [path stringByAppendingPathComponent:@"42base.sqlite"];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
