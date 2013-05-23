@@ -4,7 +4,7 @@
 #import "CCAppDelegate.h"
 #import "CCMe.h"
 
-#define appDelegate (CCAppDelegate *)[UIApplication sharedApplication].delegate
+#define appDelegate (CCAppDelegate *)[[UIApplication sharedApplication] delegate]
 
 SPEC_BEGIN(startApp)
 
