@@ -26,6 +26,10 @@
     self.tabBarController.delegate = self;
     [self.tabBarController setViewControllers: @[mainPage]];
     
+    UITabBarItem *mainTab = self.tabBarController.tabBar.items[0];
+    mainTab.image = [UIImage imageNamed:@"me"];
+    mainTab.title = @"About";
+    
     self.window.rootViewController = tabBarController;
     
     // Override point for customization after application launch.
