@@ -44,9 +44,9 @@ describe(@"Main page must contain my photo, bioraphy, contact data and name in 1
                     [viewFramesLandscape addObject:[NSValue valueWithCGRect:label.frame]];
                 }   
             }
-            [[portraitRect should] equal:landscapeRect];
+            [[portraitRect shouldNot] equal:landscapeRect];
             for (int frame=0; frame<4; frame++){
-                [[viewFramesPortrait[frame] should] equal:viewFramesLandscape[frame]];
+                [[viewFramesPortrait[frame] shouldNot] equal:viewFramesLandscape[frame]];
             }
         });
     });
