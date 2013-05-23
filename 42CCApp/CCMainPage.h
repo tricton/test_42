@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CCMainPage : NSObject
+@interface CCMainPage : UIViewController
 
 @end

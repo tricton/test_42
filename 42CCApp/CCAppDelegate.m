@@ -20,7 +20,13 @@
     
     [self loadDataFromBase];
     
+    CCMainPage *mainPage = [[CCMainPage alloc] init];
     
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.delegate = self;
+    [self.tabBarController setViewControllers: @[mainPage]];
+    
+    self.window.rootViewController = tabBarController;
     
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
