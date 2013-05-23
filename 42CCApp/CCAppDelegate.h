@@ -10,10 +10,10 @@
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 
-@interface CCAppDelegate : UIResponder <UIApplicationDelegate>
+@interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, strong) FMResultSet *result;
+@property (nonatomic, strong) UITabBarController *tabBarController;
 
 -(NSString *) getPathToDatabase;
 -(void) loadDataFromBase;

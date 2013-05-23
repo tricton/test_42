@@ -8,16 +8,19 @@
 
 #import "CCAppDelegate.h"
 #import "CCMe.h"
+#import "CCMainPage.h"
 
 @implementation CCAppDelegate
 
-@synthesize result;
+@synthesize tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     [self loadDataFromBase];
+    
+    
     
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
@@ -41,7 +44,7 @@
                        error:nil];
     FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase]];
     [db open];
-    result = [db executeQuery:@"SELECT * FROM myData"];
+    FMResultSet *result = [db executeQuery:@"SELECT * FROM myData"];
     if ([result next]){
         [CCMe myData].name = [result stringForColumn:@"name"];
         [CCMe myData].surName = [result stringForColumn:@"surName"];
