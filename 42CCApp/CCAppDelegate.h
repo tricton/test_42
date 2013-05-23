@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @interface CCAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) FMResultSet *result;
 
 -(NSString *) getPathToDatabase;
+-(void) loadDataFromBase;
 
 @end

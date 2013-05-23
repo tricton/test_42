@@ -7,14 +7,17 @@
 //
 
 #import "CCAppDelegate.h"
-#import "FMDatabase.h"
-#import "FMResultSet.h"
 
 @implementation CCAppDelegate
+
+@synthesize result;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [self loadDataFromBase];
+    
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -25,6 +28,22 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = paths[0];
     return [path stringByAppendingPathComponent:@"42base.sqlite"];
+}
+
+-(void) loadDataFromBase{
+    NSFileManager *fManager = [NSFileManager defaultManager];
+    NSString *workingPath = [self getPathToDatabase];
+    [fManager fileExistsAtPath:workingPath];
+    NSString *fileFromBundle = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"42base.sqlite"];
+    [fManager copyItemAtPath:fileFromBundle
+                      toPath:workingPath
+                       error:nil];
+    FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase]];
+    [db open];
+    result = [db executeQuery:@"SELECT * FROM myData"];
+    if ([result next]){
+        
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
