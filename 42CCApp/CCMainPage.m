@@ -9,6 +9,13 @@
 #import "CCMainPage.h"
 #import "CCMe.h"
 
+
+@interface CCMainPage (){
+//    float currentFontSize;
+}
+
+@end
+
 @implementation CCMainPage
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -28,9 +35,8 @@
         UILabel *infoLabel = [[UILabel alloc] init];
         infoLabel.text = labelText[label];
         infoLabel.tag = label+10;
-        [infoLabel sizeToFit];
         infoLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        infoLabel.numberOfLines = 20;
+        infoLabel.numberOfLines = 0;
         [self.view addSubview:infoLabel];
     }
     UIImageView *myPhoto = [[UIImageView alloc] initWithImage:[CCMe myData].myPhoto];
@@ -56,6 +62,8 @@
             }else{
                 infoLabel.frame = CGRectMake(20, 210+(label-2)*100, 280, 90);
             }
+            float font =[self sizeOfFont:infoLabel];
+            infoLabel.font = [UIFont systemFontOfSize:font];
         }
     }else{        
         myPhoto.frame = CGRectMake(20, 20, 128, 128);
@@ -66,7 +74,32 @@
             }else{
                 infoLabel.frame = CGRectMake(170, 20+(label-2)*100, 270, 110);
             }
+            infoLabel.font = [UIFont systemFontOfSize:[self sizeOfFont:infoLabel]];
+            NSLog(@"%f", [self sizeOfFont:infoLabel]);
         }
+    }
+}
+
+-(float) sizeOfFont:(UILabel *) label{
+    float fontSize = label.font.pointSize;
+    while ([self dicrementFont:label]) {
+        fontSize--;
+        label.font = [UIFont systemFontOfSize:fontSize];
+    }
+    return fontSize;
+}
+
+-(BOOL) dicrementFont:(UILabel *) label{
+    float fontSize = label.font.pointSize;
+    CGSize needSize = [label.text sizeWithFont:[UIFont systemFontOfSize:fontSize]
+                             constrainedToSize:CGSizeMake(label.frame.size.width, 10000)
+                                 lineBreakMode:NSLineBreakByWordWrapping];
+    int needNumberOfLines = needSize.height/fontSize;
+    int realNumberOfLines = label.frame.size.height/fontSize;
+    if (realNumberOfLines<needNumberOfLines){
+        return YES;
+    }else{
+        return NO;
     }
 }
 

@@ -93,11 +93,11 @@ describe(@"Main page must contain my photo, bioraphy, contact data and name in 1
                 NSArray *framesOfLabels = framesFromViews(mainPage);
                 for (int label=1; label<[framesOfLabels count]; label++){
                     UILabel *infoLabel = (UILabel *)[mainPage.view viewWithTag:label+9];
-                    float reallyNumberOfLines = infoLabel.frame.size.height/infoLabel.font.pointSize;
+                    int reallyNumberOfLines = infoLabel.frame.size.height/infoLabel.font.pointSize;
                     CGSize needSizeOfLabel = [infoLabel.text sizeWithFont:infoLabel.font
                                                      constrainedToSize:CGSizeMake(infoLabel.frame.size.width, 10000)
                                                          lineBreakMode:NSLineBreakByWordWrapping];
-                    float requiredNumberOfLines = needSizeOfLabel.height/infoLabel.font.pointSize;
+                    int requiredNumberOfLines = needSizeOfLabel.height/infoLabel.font.pointSize;
                     [[[NSNumber numberWithFloat:reallyNumberOfLines] should] beGreaterThanOrEqualTo:[NSNumber numberWithFloat:requiredNumberOfLines]];
                 }
             });
