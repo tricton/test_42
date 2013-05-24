@@ -26,7 +26,6 @@
 		7EA8485B174DE461006FDB7B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA8483B174DE461006FDB7B /* UIKit.framework */; };
 		7EA8485C174DE461006FDB7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA8483D174DE461006FDB7B /* Foundation.framework */; };
 		7EA84864174DE461006FDB7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EA84862174DE461006FDB7B /* InfoPlist.strings */; };
-		7EA84867174DE461006FDB7B /* _2CCAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA84866174DE461006FDB7B /* _2CCAppTests.m */; };
 		7EA84872174DE535006FDB7B /* CCMainPageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA84871174DE535006FDB7B /* CCMainPageTest.m */; };
 /* End PBXBuildFile section */
 
@@ -66,8 +65,6 @@
 		7EA84859174DE461006FDB7B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		7EA84861174DE461006FDB7B /* 42CCAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "42CCAppTests-Info.plist"; sourceTree = "<group>"; };
 		7EA84863174DE461006FDB7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7EA84865174DE461006FDB7B /* _2CCAppTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _2CCAppTests.h; sourceTree = "<group>"; };
-		7EA84866174DE461006FDB7B /* _2CCAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _2CCAppTests.m; sourceTree = "<group>"; };
 		7EA84871174DE535006FDB7B /* CCMainPageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMainPageTest.m; sourceTree = "<group>"; };
 		E6CC1F3801A5482084592D44 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -162,8 +159,6 @@
 		7EA8485F174DE461006FDB7B /* 42CCAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				7EA84865174DE461006FDB7B /* _2CCAppTests.h */,
-				7EA84866174DE461006FDB7B /* _2CCAppTests.m */,
 				7EA84871174DE535006FDB7B /* CCMainPageTest.m */,
 				7E6EFF83174E27F400833991 /* CCTabBarTest.m */,
 				7EA84860174DE461006FDB7B /* Supporting Files */,
@@ -333,7 +328,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EA84867174DE461006FDB7B /* _2CCAppTests.m in Sources */,
 				7EA84872174DE535006FDB7B /* CCMainPageTest.m in Sources */,
 				7E6EFF84174E27F400833991 /* CCTabBarTest.m in Sources */,
 			);

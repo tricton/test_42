@@ -1,13 +1,13 @@
+////
+////  _2CCAppTests.h
+////  42CCAppTests
+////
+////  Created by Mykola Kamysh on 23.05.13.
+////  Copyright (c) 2013 Mykola Kamysh. All rights reserved.
+////
 //
-//  _2CCAppTests.h
-//  42CCAppTests
+//#import <SenTestingKit/SenTestingKit.h>
 //
-//  Created by Mykola Kamysh on 23.05.13.
-//  Copyright (c) 2013 Mykola Kamysh. All rights reserved.
+//@interface _2CCAppTests : SenTestCase
 //
-
-#import <SenTestingKit/SenTestingKit.h>
-
-@interface _2CCAppTests : SenTestCase
-
-@end
+//@end

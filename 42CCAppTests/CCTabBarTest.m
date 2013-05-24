@@ -35,8 +35,7 @@ describe(@"Main page must contain my photo, bioraphy, contact data and name in 1
             contactsFrame = [NSValue valueWithCGRect:CGRectMake(20, 210, 280, 90)];
             bioFrame = [NSValue valueWithCGRect:CGRectMake(20, 310, 280, 90)];
             framesArray = @[photoFrame, nameFrame, birthFrame, contactsFrame, bioFrame];
-        }
-        if (orientation == UIInterfaceOrientationMaskLandscape){
+        }else{
             photoFrame = [NSValue valueWithCGRect:CGRectMake(20, 20, 128, 128)];
             nameFrame = [NSValue valueWithCGRect:CGRectMake(20, 160, 128, 20)];
             birthFrame = [NSValue valueWithCGRect:CGRectMake(20, 190, 128, 20)];
@@ -65,35 +64,41 @@ describe(@"Main page must contain my photo, bioraphy, contact data and name in 1
         context(@"Checking the frames after rotation", ^{
             __block NSArray *viewFramesPortrait = [NSArray array];
             __block NSArray *viewFramesLandscape = [NSArray array];
+            __block NSArray *expectedFramesPortrait = [NSArray array];
+            __block NSArray *expectedFramesLandscape = [NSArray array];
+            [mainPage changeViewFrames:UIInterfaceOrientationPortrait];
+            if (UIInterfaceOrientationMaskPortrait){
+                expectedFramesPortrait = constantFramesFromViews(UIInterfaceOrientationMaskPortrait);
+                viewFramesPortrait = framesFromViews(mainPage);
+            }
+            [mainPage changeViewFrames:UIInterfaceOrientationLandscapeRight];
+            if (UIInterfaceOrientationMaskLandscape){
+                expectedFramesLandscape = constantFramesFromViews(UIInterfaceOrientationMaskLandscape);
+                viewFramesLandscape = framesFromViews(mainPage);
+            }
             it(@"Frames of all view on main page in portrait orienation must have another coordinates than in landscape",^{
-                [mainPage changeViewFrames:UIInterfaceOrientationPortrait];
-                if (UIInterfaceOrientationMaskPortrait){
-                    viewFramesPortrait = framesFromViews(mainPage);
-                }
-                [mainPage changeViewFrames:UIInterfaceOrientationLandscapeRight];
-                if (UIInterfaceOrientationMaskLandscape){
-                    viewFramesLandscape = framesFromViews(mainPage);
-                }
                 for (int frame=0; frame<5; frame++){
                     [[viewFramesPortrait[frame] shouldNot] equal:viewFramesLandscape[frame]];
                 }
             });
             it(@"Frames on main view must be equal to some certain values, sracified from some requirements", ^{
-                NSArray *expectedFramesPortrait = [NSArray array];
-                NSArray *expectedFramesLandscape = [NSArray array];
-                [mainPage changeViewFrames:UIInterfaceOrientationPortrait];
-                if (UIInterfaceOrientationMaskPortrait){
-                    expectedFramesPortrait = constantFramesFromViews(UIInterfaceOrientationMaskPortrait);
-                    viewFramesPortrait = framesFromViews(mainPage);
-                }
-                [mainPage changeViewFrames:UIInterfaceOrientationLandscapeRight];
-                if (UIInterfaceOrientationMaskLandscape){
-                    expectedFramesLandscape = constantFramesFromViews(UIInterfaceOrientationMaskLandscape);
-                    viewFramesLandscape = framesFromViews(mainPage);
-                }
                 for (int frame=0; frame<5; frame++){
                     [[viewFramesPortrait[frame] should] equal:expectedFramesPortrait[frame]];
                     [[viewFramesLandscape[frame] should] equal:expectedFramesLandscape[frame]];
+                }
+            });
+        });
+        context(@"text in label should be completely visible", ^{
+            it(@"count of symbols in text property of UILabel must conform to it's size", ^{
+                NSArray *framesOfLabels = framesFromViews(mainPage);
+                for (int label=1; label<[framesOfLabels count]; label++){
+                    UILabel *infoLabel = (UILabel *)[mainPage.view viewWithTag:label+9];
+                    float reallyNumberOfLines = infoLabel.frame.size.height/infoLabel.font.pointSize;
+                    CGSize needSizeOfLabel = [infoLabel.text sizeWithFont:infoLabel.font
+                                                     constrainedToSize:CGSizeMake(infoLabel.frame.size.width, 10000)
+                                                         lineBreakMode:NSLineBreakByWordWrapping];
+                    float requiredNumberOfLines = needSizeOfLabel.height/infoLabel.font.pointSize;
+                    [[[NSNumber numberWithFloat:reallyNumberOfLines] should] beGreaterThanOrEqualTo:[NSNumber numberWithFloat:requiredNumberOfLines]];
                 }
             });
         });
