@@ -2,6 +2,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "CCFBLogin.h"
 #import "CCAppDelegate.h"
+#import <FacebookSDK/FBSessionTokenCachingStrategy.h>
 
 #define appDelegate (CCAppDelegate *)[[UIApplication sharedApplication] delegate]
 
@@ -18,6 +19,10 @@ describe(@"After application start controller CCFBLogin must be active", ^{
             [loginButton shouldNotBeNil];
             [currentController performLogin];
             [[theValue([appDelegate session].isOpen) should] equal:theValue(YES)];
+        });
+        it(@"App must have a token to store it inside to further user login", ^{
+            FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
+            [[[[tokenCache fetchFBAccessTokenData] dictionary] objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"] shouldNotBeNil];
         });
     });
 });
