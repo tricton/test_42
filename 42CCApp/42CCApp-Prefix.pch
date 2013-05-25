@@ -13,3 +13,5 @@
     #import <Foundation/Foundation.h>
 #endif
 
+#define appDelegate (CCAppDelegate *)[[UIApplication sharedApplication] delegate]
+

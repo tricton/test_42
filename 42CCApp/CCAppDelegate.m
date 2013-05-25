@@ -5,11 +5,22 @@
 
 @implementation CCAppDelegate
 
-@synthesize tabBarController, inBackground;
+@synthesize tabBarController, session;
+
+-(BOOL) application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation{
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication
+                        withSession:self.session];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    self.session = [[FBSession alloc] init];
     
     [self loadDataFromBase];
     
@@ -26,9 +37,6 @@
     
     self.window.rootViewController = loginController;
     
-    inBackground = NO;
-    
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -71,14 +79,19 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    inBackground = YES;
+- (void)applicationDidEnterBackground:(UIApplication *)application{
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    inBackground = NO;
+- (void)applicationWillEnterForeground:(UIApplication *)application{
+}
+
+-(void) openLoginApp{
+    if (!self.session.isOpen){
+        NSLog(@"no");
+    }
+    [self.session openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+        [self.window setRootViewController:tabBarController];
+    }];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

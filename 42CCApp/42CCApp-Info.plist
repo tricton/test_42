@@ -28,11 +28,26 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>FacebookAppID</key>
+	<string>504307106291030</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>FacebookDisplayName</key>
+	<string>42CCApp</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb504307106291030</string>
+			</array>
+		</dict>
 	</array>
 </dict>
 </plist>

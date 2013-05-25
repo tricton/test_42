@@ -17,7 +17,7 @@ describe(@"After application start controller CCFBLogin must be active", ^{
             UIButton *loginButton = (UIButton *)[currentController.view viewWithTag:30];
             [loginButton shouldNotBeNil];
             [currentController performLogin];
-            [[[NSNumber numberWithBool:[appDelegate inBackground]] should] beTrue];
+            [[theValue([appDelegate session].isOpen) should] equal:theValue(YES)];
         });
     });
 });

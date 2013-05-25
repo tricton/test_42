@@ -1,12 +1,6 @@
-//
-//  CCFBLogin.m
-//  42CCApp
-//
-//  Created by Mykola Kamysh on 25.05.13.
-//  Copyright (c) 2013 Mykola Kamysh. All rights reserved.
-//
-
 #import "CCFBLogin.h"
+#import "CCAppDelegate.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface CCFBLogin ()
 
@@ -39,7 +33,7 @@
 }
 
 -(void) performLogin{
-
+    [appDelegate openLoginApp];
 }
 
 - (void)didReceiveMemoryWarning
