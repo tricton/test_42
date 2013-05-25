@@ -1,3 +1,4 @@
 platform :ios
 pod 'FMDB'
 pod 'Kiwi'
+pod 'Facebook-iOS-SDK'

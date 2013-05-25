@@ -1,14 +1,7 @@
-//
-//  CCAppDelegate.m
-//  42CCApp
-//
-//  Created by Mykola Kamysh on 23.05.13.
-//  Copyright (c) 2013 Mykola Kamysh. All rights reserved.
-//
-
 #import "CCAppDelegate.h"
 #import "CCMe.h"
 #import "CCMainPage.h"
+#import "CCFBLogin.h"
 
 @implementation CCAppDelegate
 
@@ -21,6 +14,7 @@
     [self loadDataFromBase];
     
     CCMainPage *mainPage = [[CCMainPage alloc] init];
+    CCFBLogin *loginController = [[CCFBLogin alloc] init];
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.delegate = self;
@@ -30,7 +24,7 @@
     mainTab.image = [UIImage imageNamed:@"me"];
     mainTab.title = @"About";
     
-    self.window.rootViewController = tabBarController;
+    self.window.rootViewController = loginController;
     
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
