@@ -26,7 +26,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [loginButton setTitle:@"Log In"
+                 forState:UIControlStateNormal];
+    loginButton.frame = CGRectMake(110, 20, 100, 50);
+    loginButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+    loginButton.tag = 30;
+    [self.view addSubview:loginButton];
+}
+
+-(void) performLogin{
+
 }
 
 - (void)didReceiveMemoryWarning
