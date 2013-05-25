@@ -13,6 +13,10 @@ describe(@"After application start controller CCFBLogin must be active", ^{
         it(@"Further using of application user should get after login", ^{
             [[currentController should] beKindOfClass:[CCFBLogin class]];
         });
+        it(@"CCFBlogin should present button for authentificate in facebook", ^{
+            UIButton *loginButton = (UIButton *)[currentController.view viewWithTag:30];
+            [loginButton shouldNotBeNil];
+        });
     });
 });
 
