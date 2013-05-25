@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		5FE478C6A779493180B55FB2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AF818AA1F94504B30C9EB6 /* libPods.a */; };
+		7E5209E5174FD3DB00BF6701 /* CCFBTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5209E4174FD3DB00BF6701 /* CCFBTest.m */; };
+		7E5209E71750A47000BF6701 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5209E61750A47000BF6701 /* AdSupport.framework */; };
+		7E5209E91750A47600BF6701 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5209E81750A47600BF6701 /* Accounts.framework */; };
+		7E5209EB1750A48400BF6701 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5209EA1750A48400BF6701 /* libsqlite3.dylib */; };
+		7E5209ED1750A49000BF6701 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5209EC1750A49000BF6701 /* Security.framework */; };
+		7E5209EF1750A49B00BF6701 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5209EE1750A49B00BF6701 /* Social.framework */; };
+		7E5209F41750C6E200BF6701 /* CCFBLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5209F31750C6E200BF6701 /* CCFBLogin.m */; };
 		7E6EFF79174E10B800833991 /* 42base.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 7E6EFF78174E10B800833991 /* 42base.sqlite */; };
 		7E6EFF7C174E1A1800833991 /* CCMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6EFF7B174E1A1700833991 /* CCMe.m */; };
 		7E6EFF7F174E214E00833991 /* CCMainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6EFF7E174E214E00833991 /* CCMainPage.m */; };
@@ -41,6 +48,14 @@
 
 /* Begin PBXFileReference section */
 		07AF818AA1F94504B30C9EB6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E5209E4174FD3DB00BF6701 /* CCFBTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFBTest.m; sourceTree = "<group>"; };
+		7E5209E61750A47000BF6701 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		7E5209E81750A47600BF6701 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		7E5209EA1750A48400BF6701 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		7E5209EC1750A49000BF6701 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		7E5209EE1750A49B00BF6701 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		7E5209F21750C6E200BF6701 /* CCFBLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFBLogin.h; sourceTree = "<group>"; };
+		7E5209F31750C6E200BF6701 /* CCFBLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFBLogin.m; sourceTree = "<group>"; };
 		7E6EFF78174E10B800833991 /* 42base.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = 42base.sqlite; sourceTree = "<group>"; };
 		7E6EFF7A174E1A1700833991 /* CCMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMe.h; sourceTree = "<group>"; };
 		7E6EFF7B174E1A1700833991 /* CCMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMe.m; sourceTree = "<group>"; };
@@ -74,6 +89,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E5209EF1750A49B00BF6701 /* Social.framework in Frameworks */,
+				7E5209ED1750A49000BF6701 /* Security.framework in Frameworks */,
+				7E5209EB1750A48400BF6701 /* libsqlite3.dylib in Frameworks */,
+				7E5209E91750A47600BF6701 /* Accounts.framework in Frameworks */,
+				7E5209E71750A47000BF6701 /* AdSupport.framework in Frameworks */,
 				7EA8483C174DE461006FDB7B /* UIKit.framework in Frameworks */,
 				7EA8483E174DE461006FDB7B /* Foundation.framework in Frameworks */,
 				7EA84840174DE461006FDB7B /* CoreGraphics.framework in Frameworks */,
@@ -117,6 +137,11 @@
 		7EA8483A174DE461006FDB7B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E5209EE1750A49B00BF6701 /* Social.framework */,
+				7E5209EC1750A49000BF6701 /* Security.framework */,
+				7E5209EA1750A48400BF6701 /* libsqlite3.dylib */,
+				7E5209E81750A47600BF6701 /* Accounts.framework */,
+				7E5209E61750A47000BF6701 /* AdSupport.framework */,
 				7EA8483B174DE461006FDB7B /* UIKit.framework */,
 				7EA8483D174DE461006FDB7B /* Foundation.framework */,
 				7EA8483F174DE461006FDB7B /* CoreGraphics.framework */,
@@ -135,6 +160,8 @@
 				7E6EFF7B174E1A1700833991 /* CCMe.m */,
 				7E6EFF7D174E214E00833991 /* CCMainPage.h */,
 				7E6EFF7E174E214E00833991 /* CCMainPage.m */,
+				7E5209F21750C6E200BF6701 /* CCFBLogin.h */,
+				7E5209F31750C6E200BF6701 /* CCFBLogin.m */,
 				7EA84842174DE461006FDB7B /* Supporting Files */,
 			);
 			path = 42CCApp;
@@ -161,6 +188,7 @@
 			children = (
 				7EA84871174DE535006FDB7B /* CCMainPageTest.m */,
 				7E6EFF83174E27F400833991 /* CCTabBarTest.m */,
+				7E5209E4174FD3DB00BF6701 /* CCFBTest.m */,
 				7EA84860174DE461006FDB7B /* Supporting Files */,
 			);
 			path = 42CCAppTests;
@@ -321,6 +349,7 @@
 				7EA8484C174DE461006FDB7B /* CCAppDelegate.m in Sources */,
 				7E6EFF7C174E1A1800833991 /* CCMe.m in Sources */,
 				7E6EFF7F174E214E00833991 /* CCMainPage.m in Sources */,
+				7E5209F41750C6E200BF6701 /* CCFBLogin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +359,7 @@
 			files = (
 				7EA84872174DE535006FDB7B /* CCMainPageTest.m in Sources */,
 				7E6EFF84174E27F400833991 /* CCTabBarTest.m in Sources */,
+				7E5209E5174FD3DB00BF6701 /* CCFBTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

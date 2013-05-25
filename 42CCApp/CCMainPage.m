@@ -8,10 +8,10 @@
 
 #import "CCMainPage.h"
 #import "CCMe.h"
-
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface CCMainPage (){
-//    float currentFontSize;
+
 }
 
 @end
