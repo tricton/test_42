@@ -10,4 +10,6 @@
 
 @interface CCFBLogin : UIViewController
 
+-(void) performLogin;
+
 @end

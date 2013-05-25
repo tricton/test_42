@@ -32,6 +32,9 @@
     loginButton.frame = CGRectMake(110, 20, 100, 50);
     loginButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
     loginButton.tag = 30;
+    [loginButton addTarget:self
+                    action:@selector(performLogin)
+          forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginButton];
 }
 

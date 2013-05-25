@@ -12,8 +12,9 @@
 
 @interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIWindow           *window;
 @property (nonatomic, strong) UITabBarController *tabBarController;
+@property (nonatomic)         BOOL                inBackground;
 
 -(NSString *) getPathToDatabase;
 -(FMResultSet *) loadDataFromBase;
