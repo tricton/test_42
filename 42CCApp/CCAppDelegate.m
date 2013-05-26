@@ -2,10 +2,11 @@
 #import "CCMe.h"
 #import "CCMainPage.h"
 #import <FacebookSDK/FBSessionTokenCachingStrategy.h>
+#import "FBLoginView+session.h"
 
 @implementation CCAppDelegate
 
-@synthesize tabBarController, session;
+@synthesize tabBarController, session, loginController;
 
 -(BOOL) application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -33,7 +34,12 @@
     mainTab.image = [UIImage imageNamed:@"me"];
     mainTab.title = @"About";
     
-    self.window.rootViewController = loginController;
+    FBLoginView *loginView = (FBLoginView *)[loginController.view viewWithTag:30];
+    if ([loginView session]){
+        self.window.rootViewController = self.tabBarController;
+    }else{
+        self.window.rootViewController = loginController;
+    }
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

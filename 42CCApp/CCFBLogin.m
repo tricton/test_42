@@ -15,33 +15,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    [loginButton setTitle:@"Log In"
-//                 forState:UIControlStateNormal];
-//    loginButton.frame = CGRectMake(110, 20, 100, 50);
-//    loginButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
-//    loginButton.tag = 30;
-//    [loginButton addTarget:self
-//                    action:@selector(performLogin)
-//          forControlEvents:UIControlEventTouchUpInside];
     FBLoginView *loginButton = [[FBLoginView alloc] initWithFrame:CGRectMake(80, 20, 160, 50)];
     loginButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
     loginButton.tag = 30;
     loginButton.delegate = self;
     [self.view addSubview:loginButton];
 }
-
-//-(void) performLogin{
-//    CCAppDelegate *_appDelegate = appDelegate;
-//    if (![appDelegate session].isOpen){
-//        if (_appDelegate.session.state != FBSessionStateCreated){
-//            _appDelegate.session = [[FBSession alloc] init];
-//        }
-//        [_appDelegate.session openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error){}];
-//    }else{
-//        [_appDelegate.session closeAndClearTokenInformation];
-//    }
-//}
 
 -(void) loginViewShowingLoggedInUser:(FBLoginView *)loginView{
     [appDelegate openLoginApp];

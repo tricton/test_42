@@ -13,12 +13,12 @@
 #import "CCFBLogin.h"
 
 @interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>{
-    CCFBLogin *loginController;
 }
 
 @property (strong, nonatomic) UIWindow           *window;
 @property (nonatomic, strong) UITabBarController *tabBarController;
 @property (nonatomic, strong) FBSession          *session;
+@property (nonatomic, strong) CCFBLogin          *loginController;
 
 -(NSString *) getPathToDatabase;
 -(FMResultSet *) loadDataFromBase;

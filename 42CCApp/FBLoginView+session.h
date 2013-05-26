@@ -10,4 +10,6 @@
 
 @interface FBLoginView (session)
 
+@property (retain, nonatomic) FBSession *session;
+
 @end

@@ -12,7 +12,7 @@ SPEC_BEGIN(FB_checking)
 
 describe(@"After application start controller CCFBLogin must be active", ^{
     context(@"CCFBLogin should not give the  user go further inside appllication", ^{
-        __block CCFBLogin *currentController = (CCFBLogin *)[appDelegate window].rootViewController;
+        __block CCFBLogin *currentController = (CCFBLogin *)[appDelegate loginController];
         it(@"Further using of application user should get after login", ^{
             [[currentController should] beKindOfClass:[CCFBLogin class]];
         });
@@ -20,23 +20,20 @@ describe(@"After application start controller CCFBLogin must be active", ^{
             UIView *loginButton = (UIButton *)[currentController.view viewWithTag:30];
             [[loginButton should] beKindOfClass:[FBLoginView class]];
         });
-        it(@"Session to FB should be open to get token. App should not enter to further work with it without login to facebook", ^{
+        it(@"Session to FB should be open to get token. App should not enter to further work with it without login to facebook. App must have a token to store it inside to further user login", ^{
             FBLoginView *loginView = (FBLoginView *)[currentController.view viewWithTag:30];
-            [[theValue([loginView session].isOpen) should] equal:theValue(YES)];
-            if ([loginView session]){
+            FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
+            if ([loginView session].isOpen){
+                [[theValue([loginView session].isOpen) should] equal:theValue(YES)];
+                [[[[tokenCache fetchFBAccessTokenData] dictionary] objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"] shouldNotBeNil];
                 [[[appDelegate window].rootViewController should] equal:[appDelegate tabBarController]];
             }
         });
-        it(@"App must have a token to store it inside to further user login", ^{
-            FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
-            [[[[tokenCache fetchFBAccessTokenData] dictionary] objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"] shouldNotBeNil];
+        it(@"", ^{
+
+            
         });
     });
-//    context(@"Testing app to login parameters", ^{
-//        it(@"App should not enter to further work with it without login to facebook", ^{
-//            [[[appDelegate window].rootViewController should] equal:[appDelegate tabBarController]];
-//        });
-//    });
 });
 
 SPEC_END
