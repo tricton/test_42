@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface CCFBLogin : UIViewController //<FBLoginViewDelegate>
+@interface CCFBLogin : UIViewController <FBLoginViewDelegate, UIAlertViewDelegate>
 
 @end

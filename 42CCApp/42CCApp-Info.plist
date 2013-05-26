@@ -34,6 +34,8 @@
 	<string></string>
 	<key>FacebookDisplayName</key>
 	<string>42CCApp</string>
+	<key>UIApplicationExitsOnSuspend</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
