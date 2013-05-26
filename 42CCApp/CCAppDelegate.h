@@ -10,16 +10,19 @@
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "CCFBLogin.h"
 
-@interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>{
+    CCFBLogin *loginController;
+}
 
 @property (strong, nonatomic) UIWindow           *window;
 @property (nonatomic, strong) UITabBarController *tabBarController;
-//@property (nonatomic)         BOOL                inBackground;
 @property (nonatomic, strong) FBSession          *session;
 
 -(NSString *) getPathToDatabase;
 -(FMResultSet *) loadDataFromBase;
 -(void) openLoginApp;
+-(void) closeLoginApp;
 
 @end

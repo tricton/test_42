@@ -3,6 +3,8 @@
 #import "CCFBLogin.h"
 #import "CCAppDelegate.h"
 #import <FacebookSDK/FBSessionTokenCachingStrategy.h>
+#import <FacebookSDK/FBLoginView.h>
+#import "FBLoginView+LIttlePatch.h"
 
 #define appDelegate (CCAppDelegate *)[[UIApplication sharedApplication] delegate]
 
@@ -15,9 +17,8 @@ describe(@"After application start controller CCFBLogin must be active", ^{
             [[currentController should] beKindOfClass:[CCFBLogin class]];
         });
         it(@"CCFBlogin should present button for authentificate in facebook. After pressing button sholud launch another app to log in to FB", ^{
-            UIButton *loginButton = (UIButton *)[currentController.view viewWithTag:30];
-            [loginButton shouldNotBeNil];
-            [currentController performLogin];
+            UIView *loginButton = (UIButton *)[currentController.view viewWithTag:30];
+            [[loginButton should] beKindOfClass:[FBLoginView class]];
             [[theValue([appDelegate session].isOpen) should] equal:theValue(YES)];
         });
         it(@"App must have a token to store it inside to further user login", ^{

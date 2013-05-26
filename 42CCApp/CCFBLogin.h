@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface CCFBLogin : UIViewController
-
--(void) performLogin;
+@interface CCFBLogin : UIViewController //<FBLoginViewDelegate>
 
 @end

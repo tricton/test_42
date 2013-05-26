@@ -1,10 +1,5 @@
 #import "CCFBLogin.h"
 #import "CCAppDelegate.h"
-#import <FacebookSDK/FacebookSDK.h>
-
-@interface CCFBLogin ()
-
-@end
 
 @implementation CCFBLogin
 
@@ -20,20 +15,56 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [loginButton setTitle:@"Log In"
-                 forState:UIControlStateNormal];
-    loginButton.frame = CGRectMake(110, 20, 100, 50);
+//    UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    [loginButton setTitle:@"Log In"
+//                 forState:UIControlStateNormal];
+//    loginButton.frame = CGRectMake(110, 20, 100, 50);
+//    loginButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+//    loginButton.tag = 30;
+//    [loginButton addTarget:self
+//                    action:@selector(performLogin)
+//          forControlEvents:UIControlEventTouchUpInside];
+    FBLoginView *loginButton = [[FBLoginView alloc] initWithFrame:CGRectMake(80, 20, 160, 50)];
     loginButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
     loginButton.tag = 30;
-    [loginButton addTarget:self
-                    action:@selector(performLogin)
-          forControlEvents:UIControlEventTouchUpInside];
+//    loginButton.delegate = self;
     [self.view addSubview:loginButton];
+    CCAppDelegate *_appDelegate = appDelegate;
+    if (![appDelegate session].isOpen){
+        _appDelegate.session = [[FBSession alloc] init];
+        if (_appDelegate.session.state == FBSessionStateCreatedTokenLoaded){
+            [_appDelegate.session openWithCompletionHandler:^(FBSession *session, FBSessionState status,
+                                                              NSError *error){
+                
+            }];
+            
+        }
+    }
 }
 
 -(void) performLogin{
+    CCAppDelegate *_appDelegate = appDelegate;
+    if (![appDelegate session].isOpen){
+        if (_appDelegate.session.state != FBSessionStateCreated){
+            _appDelegate.session = [[FBSession alloc] init];
+        }
+        [_appDelegate.session openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error){}];
+    }else{
+        [_appDelegate.session closeAndClearTokenInformation];
+    }
+}
+
+-(void) loginViewShowingLoggedInUser:(FBLoginView *)loginView{
     [appDelegate openLoginApp];
+}
+
+-(void) loginViewShowingLoggedOutUser:(FBLoginView *)loginView{
+    [appDelegate closeLoginApp];
+}
+
+-(void) loginView:(FBLoginView *)loginView
+      handleError:(NSError *)error{
+
 }
 
 - (void)didReceiveMemoryWarning

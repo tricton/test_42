@@ -1,7 +1,7 @@
 #import "CCAppDelegate.h"
 #import "CCMe.h"
 #import "CCMainPage.h"
-#import "CCFBLogin.h"
+#import <FacebookSDK/FBSessionTokenCachingStrategy.h>
 
 @implementation CCAppDelegate
 
@@ -20,12 +20,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    self.session = [[FBSession alloc] init];
-    
     [self loadDataFromBase];
     
     CCMainPage *mainPage = [[CCMainPage alloc] init];
-    CCFBLogin *loginController = [[CCFBLogin alloc] init];
+    loginController = [[CCFBLogin alloc] init];
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.delegate = self;
@@ -86,17 +84,15 @@
 }
 
 -(void) openLoginApp{
-    if (!self.session.isOpen){
-        NSLog(@"no");
-    }
-    [self.session openWithCompletionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-        [self.window setRootViewController:tabBarController];
-    }];
+    [self.window setRootViewController:tabBarController];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+-(void) closeLoginApp{
+    [self.window setRootViewController:loginController];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application{
+    [FBAppCall handleDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
