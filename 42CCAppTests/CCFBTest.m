@@ -2,8 +2,6 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "CCFBLogin.h"
 #import "CCAppDelegate.h"
-//#import <FacebookSDK/FBSessionTokenCachingStrategy.h>
-//#import <FacebookSDK/FBLoginView.h>
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 #import "CCMainPage.h"
@@ -30,25 +28,32 @@ describe(@"After application start controller CCFBLogin must be active", ^{
                 [[theValue([FBSession activeSession].isOpen) should] equal:theValue(YES)];
                 [[[[tokenCache fetchFBAccessTokenData] dictionary] objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"] shouldNotBeNil];
                 [[[appDelegate window].rootViewController should] equal:[appDelegate tabBarController]];
-            }
+            } 
         });
         context(@"Data from FB profile should stored in database", ^{
             it(@"Propertys in CCMe should conform to appropropriate propertys in FBGraphUser", ^{
-                    [[[CCMe myData].name should] equal:[userInfo objectForKey:@"first_name"]];
-                    [[[CCMe myData].surName should] equal:[userInfo objectForKey:@"last_name"]];
-                    [[[CCMe myData].birthDay should] equal:[userInfo objectForKey:@"birthday"]];
-                    [[[CCMe myData].biography should] equal:[userInfo objectForKey:@"bio"]];
-                    [[[CCMe myData].address should] equal:[userInfo objectForKey:@"link"]];
-                    [[[CCMe myData].phone should] equal:[userInfo objectForKey:@"devices"]];
-                    [[[CCMe myData].coordinates should] equal:[userInfo objectForKey:@"location"]];
-                    [[[CCMe myData].email should] equal:[userInfo objectForKey:@"email"]];
-                    FBProfilePictureView *pictureView = [[FBProfilePictureView alloc] initWithProfileID:[userInfo objectForKey:@"id"]
-                                                                                        pictureCropping:FBProfilePictureCroppingOriginal];
-                    [[[CCMe myData].myPhoto should] equal:[pictureView imageView].image];
+                __block NSDictionary *userInfo;
+                if (FBSession.activeSession.isOpen) {
+                    [[FBRequest requestForMe] startWithCompletionHandler:
+                     ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+                         if (!error) {
+                             userInfo = user;
+                         }
+                     }];
+                }
+                [[expectFutureValue([CCMe myData].name) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"first_name"]];
+                [[expectFutureValue([CCMe myData].surName) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"last_name"]];
+                [[expectFutureValue([CCMe myData].birthDay) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"birthday"]];
+                [[expectFutureValue([CCMe myData].biography) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"bio"]];
+                [[expectFutureValue([CCMe myData].address) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"link"]];
+                [[expectFutureValue([CCMe myData].phone) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"devices"]];
+                [[expectFutureValue([CCMe myData].coordinates) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"location"]];
+                [[expectFutureValue([CCMe myData].email) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"email"]];
+                FBProfilePictureView *pictureView = [[FBProfilePictureView alloc] initWithProfileID:[userInfo objectForKey:@"id"]
+                                                                                    pictureCropping:FBProfilePictureCroppingOriginal];
+                [[expectFutureValue([CCMe myData].myPhoto) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[pictureView imageView].image];
 
-                
 
-                
             });
         });
     });

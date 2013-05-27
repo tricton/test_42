@@ -57,6 +57,7 @@
 		7E5209F21750C6E200BF6701 /* CCFBLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFBLogin.h; sourceTree = "<group>"; };
 		7E5209F31750C6E200BF6701 /* CCFBLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFBLogin.m; sourceTree = "<group>"; };
 		7E634B66175285F2003059A9 /* FBProfilePictureView+getImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBProfilePictureView+getImage.h"; sourceTree = "<group>"; };
+		7E634B691753DCA7003059A9 /* FBLoginView+session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBLoginView+session.h"; sourceTree = "<group>"; };
 		7E6EFF78174E10B800833991 /* 42base.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = 42base.sqlite; sourceTree = "<group>"; };
 		7E6EFF7A174E1A1700833991 /* CCMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMe.h; sourceTree = "<group>"; };
 		7E6EFF7B174E1A1700833991 /* CCMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMe.m; sourceTree = "<group>"; };
@@ -164,6 +165,7 @@
 				7E5209F21750C6E200BF6701 /* CCFBLogin.h */,
 				7E5209F31750C6E200BF6701 /* CCFBLogin.m */,
 				7E634B66175285F2003059A9 /* FBProfilePictureView+getImage.h */,
+				7E634B691753DCA7003059A9 /* FBLoginView+session.h */,
 				7EA84842174DE461006FDB7B /* Supporting Files */,
 			);
 			path = 42CCApp;
