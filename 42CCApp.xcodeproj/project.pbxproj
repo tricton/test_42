@@ -56,6 +56,7 @@
 		7E5209EE1750A49B00BF6701 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		7E5209F21750C6E200BF6701 /* CCFBLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFBLogin.h; sourceTree = "<group>"; };
 		7E5209F31750C6E200BF6701 /* CCFBLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFBLogin.m; sourceTree = "<group>"; };
+		7E634B66175285F2003059A9 /* FBProfilePictureView+getImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBProfilePictureView+getImage.h"; sourceTree = "<group>"; };
 		7E6EFF78174E10B800833991 /* 42base.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = 42base.sqlite; sourceTree = "<group>"; };
 		7E6EFF7A174E1A1700833991 /* CCMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMe.h; sourceTree = "<group>"; };
 		7E6EFF7B174E1A1700833991 /* CCMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMe.m; sourceTree = "<group>"; };
@@ -81,7 +82,6 @@
 		7EA84861174DE461006FDB7B /* 42CCAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "42CCAppTests-Info.plist"; sourceTree = "<group>"; };
 		7EA84863174DE461006FDB7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EA84871174DE535006FDB7B /* CCMainPageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMainPageTest.m; sourceTree = "<group>"; };
-		7EE038E3175237BF0072CE1F /* FBLoginView+session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBLoginView+session.h"; sourceTree = "<group>"; };
 		E6CC1F3801A5482084592D44 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -163,7 +163,7 @@
 				7E6EFF7E174E214E00833991 /* CCMainPage.m */,
 				7E5209F21750C6E200BF6701 /* CCFBLogin.h */,
 				7E5209F31750C6E200BF6701 /* CCFBLogin.m */,
-				7EE038E3175237BF0072CE1F /* FBLoginView+session.h */,
+				7E634B66175285F2003059A9 /* FBProfilePictureView+getImage.h */,
 				7EA84842174DE461006FDB7B /* Supporting Files */,
 			);
 			path = 42CCApp;

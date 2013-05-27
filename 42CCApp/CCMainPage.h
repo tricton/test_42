@@ -11,5 +11,6 @@
 @interface CCMainPage : UIViewController
 
 -(void) changeViewFrames:(UIInterfaceOrientation) orientation;
+-(void) saveDataFromFB;
 
 @end

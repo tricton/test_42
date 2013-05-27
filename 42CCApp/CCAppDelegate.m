@@ -2,7 +2,6 @@
 #import "CCMe.h"
 #import "CCMainPage.h"
 #import <FacebookSDK/FBSessionTokenCachingStrategy.h>
-#import "FBLoginView+session.h"
 
 @implementation CCAppDelegate
 
@@ -34,8 +33,7 @@
     mainTab.image = [UIImage imageNamed:@"me"];
     mainTab.title = @"About";
     
-    FBLoginView *loginView = (FBLoginView *)[loginController.view viewWithTag:30];
-    if ([loginView session]){
+    if (FBSession.activeSession.isOpen){
         self.window.rootViewController = self.tabBarController;
     }else{
         self.window.rootViewController = loginController;
