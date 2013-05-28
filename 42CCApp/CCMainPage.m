@@ -23,11 +23,7 @@
 
 - (void)viewDidLoad{
     
-//    NSString *name = [NSString stringWithFormat:@"%@ %@", [CCMe myData].name, [CCMe myData].surName ];
-//    NSString *birth = [CCMe myData].birthDay;
-//    NSString *bio = [CCMe myData].biography;
-//    NSString *contacts = [CCMe myData].contact;
-//    NSArray *labelText = @[name, birth, contacts, bio];
+
     for (int label=0; label<4; label++){
         UILabel *infoLabel = [[UILabel alloc] init];
         infoLabel.tag = label+10;
@@ -41,6 +37,44 @@
     [self.view addSubview:myPhoto];    
     UIInterfaceOrientation orientation = [UIApplication sharedApplication]. statusBarOrientation;
     [self changeViewFrames:orientation];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(putDataToFields)
+                                                 name:@"Download done"
+                                               object:nil];
+}
+
+-(void) putDataToFields{
+    NSMutableArray *labelText = [NSMutableArray array];
+    NSString *name = [NSString stringWithFormat:@"%@ %@", [CCMe myData].name, [CCMe myData].surName ];
+    if (name){
+        [labelText addObject:name];
+    }else{
+        [labelText addObject:@""];
+    }
+    NSString *birth = [CCMe myData].birthDay;
+    if (birth){
+        [labelText addObject:birth];
+    }else{
+        [labelText addObject:@""];
+    }
+    NSString *bio = [CCMe myData].biography;
+    if (bio){
+        [labelText addObject:bio];
+    }else{
+        [labelText addObject:@""];
+    }
+    NSString *contact = [CCMe myData].contact;
+    if (contact){
+        [labelText addObject:contact];
+    }else{
+        [labelText addObject:@""];
+    }
+    for (int labelTag=0; labelTag<4; labelTag++){
+        UILabel *label = (UILabel *)[self.view viewWithTag:labelTag+10];
+        label.text = labelText[labelTag];
+    }
+    UIImageView *myPhoto = (UIImageView *)[self.view viewWithTag:20];
+    myPhoto.image = [CCMe myData].myPhoto;
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -63,9 +97,16 @@
          ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
              if (!error) {
                  [db executeUpdate:@"DELETE FROM FBData"];
-                 FBProfilePictureView *pictureView = [[FBProfilePictureView alloc] initWithProfileID:[user objectForKey:@"id"]
+                 FBProfilePictureView *pictureView = [[FBProfilePictureView alloc] initWithProfileID:user.id
                                                                                      pictureCropping:FBProfilePictureCroppingOriginal];
-                 [db executeUpdate:@"insert into FBData (name, surName, biography, contact, birthday, photo) values (?,?,?,?,?,?)", [user objectForKey:@"first_name"], [user objectForKey:@"last_name"], [user objectForKey:@"bio"], [user objectForKey:@"email"], [user objectForKey:@"birthday"], [pictureView imageView].image];
+                 UIImageView *imageView = nil;
+                 for (id obj in [pictureView subviews]){
+                     if ([obj isMemberOfClass:[UIImageView class]]){
+                         imageView = (UIImageView *)obj;
+                     }
+                 }
+                 NSData *pic = UIImagePNGRepresentation(imageView.image);
+                 [db executeUpdate:@"insert into FBData (name, surName, biography, contact, birthday, photo) values (?,?,?,?,?,?)", [user objectForKey:@"first_name"], [user objectForKey:@"last_name"], [user objectForKey:@"bio"], [user objectForKey:@"email"], [user objectForKey:@"birthday"], pic];
                  result = [db executeQuery:@"SELECT * FROM FBData"];
                  if ([result next]){
                      [CCMe myData].name = [result stringForColumn:@"name"];
@@ -74,7 +115,10 @@
                      [CCMe myData].biography = [result stringForColumn:@"biography"];
                      [CCMe myData].contact = [result stringForColumn:@"contact"];
                      [CCMe myData].myPhoto = [UIImage imageWithData:[result dataForColumn:@"photo"]];
+                     
                  }
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Download done"
+                                                                     object:nil];
              }
          }];
     }

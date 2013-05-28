@@ -48,19 +48,6 @@ describe(@"Main page must contain my photo, bioraphy, contact data and name in 1
     
     __block CCMainPage *mainPage = [appDelegate tabBarController].viewControllers[0];
     context(@"Text of labels & UIImage propery of UIImageView should not be empty", ^{
-//        NSString *name = [NSString stringWithFormat:@"%@ %@", [CCMe myData].name, [CCMe myData].surName ];
-//        NSString *birth = [CCMe myData].birthDay;
-//        NSString *bio = [CCMe myData].biography;
-//        NSString *contacts = [CCMe myData].contact;
-//        __block NSArray *labelText = @[name, birth, contacts, bio];
-//        it(@"Data in object above must be equal to data from database. ", ^{
-//            for (int labelTag=0; labelTag<4; labelTag++){
-//                UILabel *label = (UILabel *)[mainPage.view viewWithTag:labelTag+10];
-//                [[label.text should] equal:labelText[labelTag]];
-//            }
-//            UIImageView *myPhoto = (UIImageView *)[mainPage.view viewWithTag:20];
-//            [[myPhoto.image should] equal:[CCMe myData].myPhoto];
-//        });
         context(@"Checking the frames after rotation", ^{
             __block NSArray *viewFramesPortrait = [NSArray array];
             __block NSArray *viewFramesLandscape = [NSArray array];
