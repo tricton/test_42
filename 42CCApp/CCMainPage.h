@@ -13,7 +13,7 @@
 
 -(void) changeViewFrames:(UIInterfaceOrientation) orientation;
 -(void) saveDataFromFB;
--(NSString *) getPathToDatabase;
+-(NSString *) getPathToDatabase:(NSString *) string;
 -(FMResultSet *) loadDataFromMyPage;
 
 

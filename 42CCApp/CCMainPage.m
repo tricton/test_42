@@ -83,13 +83,13 @@
 
 -(FMResultSet *) loadDataFromMyPage{
     NSFileManager *fManager = [NSFileManager defaultManager];
-    NSString *workingPath = [self getPathToDatabase];
+    NSString *workingPath = [self getPathToDatabase:@"42base.sqlite"];
     [fManager fileExistsAtPath:workingPath];
     NSString *fileFromBundle = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"42base.sqlite"];
     [fManager copyItemAtPath:fileFromBundle
                       toPath:workingPath
                        error:nil];
-    FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase]];
+    FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase:@"42base.sqlite"]];
     [db open];
     __block FMResultSet *result;
     if (FBSession.activeSession.isOpen) {
@@ -125,10 +125,10 @@
     return result;
 }
 
--(NSString *) getPathToDatabase{
+-(NSString *) getPathToDatabase:(NSString *) string{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = paths[0];
-    return [path stringByAppendingPathComponent:@"42base.sqlite"];
+    return [path stringByAppendingPathComponent:string];
 }
 
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
