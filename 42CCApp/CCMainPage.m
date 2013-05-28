@@ -115,12 +115,15 @@
                      [CCMe myData].biography = [result stringForColumn:@"biography"];
                      [CCMe myData].contact = [result stringForColumn:@"contact"];
                      [CCMe myData].myPhoto = [UIImage imageWithData:[result dataForColumn:@"photo"]];
-                     
                  }
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"Download done"
                                                                      object:nil];
              }
          }];
+        FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
+        NSDictionary *localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
+        [localToken writeToFile:[self getPathToDatabase:@"token"]
+                     atomically:YES];
     }
     return result;
 }

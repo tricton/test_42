@@ -98,17 +98,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "42CCAppTests/CCFBTest.m"
-         timestampString = "391285964.975371"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "29"
-         endingLineNumber = "29">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "42CCApp/CCFBLogin.m"
          timestampString = "391286516.403901"
          startingColumnNumber = "9223372036854775807"
@@ -215,6 +204,17 @@
          endingLineNumber = "102"
          landmarkName = "-loadDataFromMyPage"
          landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "42CCAppTests/CCFBTest.m"
+         timestampString = "391444449.04199"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "31"
+         endingLineNumber = "31">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

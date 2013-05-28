@@ -29,7 +29,7 @@ describe(@"After application start controller CCFBLogin must be active", ^{
                 [[theValue([FBSession activeSession].isOpen) should] equal:theValue(YES)];
                 [[[[tokenCache fetchFBAccessTokenData] dictionary] objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"] shouldNotBeNil];
                 NSDictionary *localToken = [NSDictionary dictionaryWithContentsOfFile:[mainPage getPathToDatabase:@"token"]];
-                [[[localToken objectForKey:@"localToken"] should] equal:[[[tokenCache fetchFBAccessTokenData] dictionary] objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"]];
+                [[[localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey" ] should] equal:[[[tokenCache fetchFBAccessTokenData] dictionary] objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"]];
                 [[[appDelegate window].rootViewController should] equal:[appDelegate tabBarController]];
             } 
         });
