@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FMResultSet.h"
 
 @interface CCMainPage : UIViewController
 
 -(void) changeViewFrames:(UIInterfaceOrientation) orientation;
 -(void) saveDataFromFB;
+-(NSString *) getPathToDatabase;
+-(FMResultSet *) loadDataFromMyPage;
+
 
 @end

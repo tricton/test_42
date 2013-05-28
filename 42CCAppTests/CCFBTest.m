@@ -31,6 +31,7 @@ describe(@"After application start controller CCFBLogin must be active", ^{
             } 
         });
         context(@"Data from FB profile should stored in database", ^{
+            __block CCMainPage *mainPage = (CCMainPage *)[appDelegate tabBarController].viewControllers[0];
             it(@"Propertys in CCMe should conform to appropropriate propertys in FBGraphUser", ^{
                 __block NSDictionary *userInfo;
                 if (FBSession.activeSession.isOpen) {
@@ -45,15 +46,12 @@ describe(@"After application start controller CCFBLogin must be active", ^{
                 [[expectFutureValue([CCMe myData].surName) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"last_name"]];
                 [[expectFutureValue([CCMe myData].birthDay) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"birthday"]];
                 [[expectFutureValue([CCMe myData].biography) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"bio"]];
-                [[expectFutureValue([CCMe myData].address) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"link"]];
-                [[expectFutureValue([CCMe myData].phone) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"devices"]];
-                [[expectFutureValue([CCMe myData].coordinates) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"location"]];
-                [[expectFutureValue([CCMe myData].email) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"email"]];
+                [[expectFutureValue([CCMe myData].contact) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[userInfo objectForKey:@"email"]];
                 FBProfilePictureView *pictureView = [[FBProfilePictureView alloc] initWithProfileID:[userInfo objectForKey:@"id"]
                                                                                     pictureCropping:FBProfilePictureCroppingOriginal];
                 [[expectFutureValue([CCMe myData].myPhoto) shouldEventuallyBeforeTimingOutAfter(3.0)] equal:[pictureView imageView].image];
-
-
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"Download done"];
+                [[mainPage should] respondsToSelector:@selector(putDataToFields)];
             });
         });
     });

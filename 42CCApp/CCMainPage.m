@@ -2,6 +2,9 @@
 #import "CCMe.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "CCFBLogin.h"
+#import "FMDatabase.h"
+#import "CCAppDelegate.h"
+#import "FBProfilePictureView+getImage.h"
 
 @interface CCMainPage (){
 
@@ -19,24 +22,69 @@
 }
 
 - (void)viewDidLoad{
-    NSString *name = [NSString stringWithFormat:@"%@ %@", [CCMe myData].name, [CCMe myData].surName ];
-    NSString *birth = [CCMe myData].birthDay;
-    NSString *bio = [CCMe myData].biography;
-    NSString *contacts = [NSString stringWithFormat:@"%@ \n %@ \n %@ \n if you want to see where i live coordinates - %@", [CCMe myData].address, [CCMe myData].phone, [CCMe myData].email, [CCMe myData].coordinates];
-    NSArray *labelText = @[name, birth, contacts, bio];
-    for (int label=0; label<[labelText count]; label++){
+    
+//    NSString *name = [NSString stringWithFormat:@"%@ %@", [CCMe myData].name, [CCMe myData].surName ];
+//    NSString *birth = [CCMe myData].birthDay;
+//    NSString *bio = [CCMe myData].biography;
+//    NSString *contacts = [CCMe myData].contact;
+//    NSArray *labelText = @[name, birth, contacts, bio];
+    for (int label=0; label<4; label++){
         UILabel *infoLabel = [[UILabel alloc] init];
-        infoLabel.text = labelText[label];
         infoLabel.tag = label+10;
         infoLabel.lineBreakMode = NSLineBreakByWordWrapping;
         infoLabel.numberOfLines = 0;
         [self.view addSubview:infoLabel];
     }
-    UIImageView *myPhoto = [[UIImageView alloc] initWithImage:[CCMe myData].myPhoto];
+    UIImageView *myPhoto = [[UIImageView alloc] init];
+//     WithImage:[CCMe myData].myPhoto];
     myPhoto.tag = 20;
-    [self.view addSubview:myPhoto];
+    [self.view addSubview:myPhoto];    
     UIInterfaceOrientation orientation = [UIApplication sharedApplication]. statusBarOrientation;
     [self changeViewFrames:orientation];
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [self loadDataFromMyPage];
+}
+
+-(FMResultSet *) loadDataFromMyPage{
+    NSFileManager *fManager = [NSFileManager defaultManager];
+    NSString *workingPath = [self getPathToDatabase];
+    [fManager fileExistsAtPath:workingPath];
+    NSString *fileFromBundle = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"42base.sqlite"];
+    [fManager copyItemAtPath:fileFromBundle
+                      toPath:workingPath
+                       error:nil];
+    FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase]];
+    [db open];
+    __block FMResultSet *result;
+    if (FBSession.activeSession.isOpen) {
+        [[FBRequest requestForMe] startWithCompletionHandler:
+         ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+             if (!error) {
+                 [db executeUpdate:@"DELETE FROM FBData"];
+                 FBProfilePictureView *pictureView = [[FBProfilePictureView alloc] initWithProfileID:[user objectForKey:@"id"]
+                                                                                     pictureCropping:FBProfilePictureCroppingOriginal];
+                 [db executeUpdate:@"insert into FBData (name, surName, biography, contact, birthday, photo) values (?,?,?,?,?,?)", [user objectForKey:@"first_name"], [user objectForKey:@"last_name"], [user objectForKey:@"bio"], [user objectForKey:@"email"], [user objectForKey:@"birthday"], [pictureView imageView].image];
+                 result = [db executeQuery:@"SELECT * FROM FBData"];
+                 if ([result next]){
+                     [CCMe myData].name = [result stringForColumn:@"name"];
+                     [CCMe myData].surName = [result stringForColumn:@"surName"];
+                     [CCMe myData].birthDay = [result stringForColumn:@"birthday"];
+                     [CCMe myData].biography = [result stringForColumn:@"biography"];
+                     [CCMe myData].contact = [result stringForColumn:@"contact"];
+                     [CCMe myData].myPhoto = [UIImage imageWithData:[result dataForColumn:@"photo"]];
+                 }
+             }
+         }];
+    }
+    return result;
+}
+
+-(NSString *) getPathToDatabase{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = paths[0];
+    return [path stringByAppendingPathComponent:@"42base.sqlite"];
 }
 
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

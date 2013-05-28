@@ -10,7 +10,7 @@
 
 @implementation CCMe
 
-@synthesize name, surName, birthDay,biography, address, phone, coordinates, email, myPhoto;
+@synthesize name, surName, birthDay,biography, contact, myPhoto;
 
 +(CCMe *) myData{
     static CCMe *me = nil;

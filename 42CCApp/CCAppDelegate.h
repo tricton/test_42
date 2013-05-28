@@ -20,8 +20,6 @@
 @property (nonatomic, strong) FBSession          *session;
 @property (nonatomic, strong) CCFBLogin          *loginController;
 
--(NSString *) getPathToDatabase;
--(FMResultSet *) loadDataFromBase;
 -(void) openLoginApp;
 -(void) closeLoginApp;
 

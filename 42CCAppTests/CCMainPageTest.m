@@ -3,41 +3,37 @@
 #import "FMResultSet.h"
 #import "CCAppDelegate.h"
 #import "CCMe.h"
+#import "CCMainPage.h"
 
 #define appDelegate (CCAppDelegate *)[[UIApplication sharedApplication] delegate]
 
 SPEC_BEGIN(startApp)
 
 describe(@"Application should create a FMDB entity to work with database", ^{
-    __block FMDatabase *db = [FMDatabase databaseWithPath:[appDelegate getPathToDatabase]];
+    __block CCMainPage *mainPage = (CCMainPage *) [appDelegate tabBarController].viewControllers[0];
+    __block FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase]];
     context(@"Entity of FMDB must read database from file", ^{
         [db open];
         it(@" Database file must have one row with data",^{
             [db shouldNotBeNil];
-            [[appDelegate loadDataFromBase] shouldNotBeNil];
+            [[mainPage loadDataFromMyPage] shouldNotBeNil];
         });
         it(@"Allfields for entity CCMe should not be nil", ^{
             [[CCMe myData].name shouldNotBeNil];
             [[CCMe myData].surName shouldNotBeNil];
             [[CCMe myData].birthDay shouldNotBeNil];
             [[CCMe myData].biography shouldNotBeNil];
-            [[CCMe myData].address shouldNotBeNil];
-            [[CCMe myData].phone shouldNotBeNil];
-            [[CCMe myData].coordinates shouldNotBeNil];
-            [[CCMe myData].email shouldNotBeNil];
+            [[CCMe myData].contact shouldNotBeNil];
             [[CCMe myData].myPhoto shouldNotBeNil];
         });
         it(@"All fields for entity CCMe should be filled by appropriate data from database", ^{
-            if ([[appDelegate loadDataFromBase] next]){
-                [[[CCMe myData].name should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"name"]];
-                [[[CCMe myData].surName should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"surName"]] ;
-                [[[CCMe myData].birthDay should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"birthDay"]];
-                [[[CCMe myData].biography should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"biography"]];
-                [[[CCMe myData].address should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"address"]];
-                [[[CCMe myData].phone should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"phone"]];
-                [[[CCMe myData].coordinates should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"coordinates"]];
-                [[[CCMe myData].email should] equal:[[appDelegate loadDataFromBase] stringForColumn:@"email"]];
-                [[[CCMe myData].myPhoto should] equal:[UIImage imageWithData:[[appDelegate loadDataFromBase] dataForColumn:@"photo"]]];
+            if ([[mainPage loadDataFromMyPage] next]){
+                [[[CCMe myData].name should] equal:[[mainPage loadDataFromMyPage] stringForColumn:@"name"]];
+                [[[CCMe myData].surName should] equal:[[mainPage loadDataFromMyPage] stringForColumn:@"surName"]] ;
+                [[[CCMe myData].birthDay should] equal:[[mainPage loadDataFromMyPage] stringForColumn:@"birthDay"]];
+                [[[CCMe myData].biography should] equal:[[mainPage loadDataFromMyPage] stringForColumn:@"biography"]];
+                [[[CCMe myData].contact should] equal:[[mainPage loadDataFromMyPage] stringForColumn:@"contact"]];
+                [[[CCMe myData].myPhoto should] equal:[[mainPage loadDataFromMyPage] dataForColumn:@"photo"]];
             }
         });
     });
