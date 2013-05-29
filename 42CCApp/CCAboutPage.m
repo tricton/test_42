@@ -26,7 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    UITextView *aboutView = [[UITextView alloc] initWithFrame:self.view.bounds];
+    aboutView.tag = 50;
+    [self.view addSubview:aboutView];
 }
 
 - (void)didReceiveMemoryWarning
