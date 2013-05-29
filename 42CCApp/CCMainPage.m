@@ -37,7 +37,6 @@
         [self.view addSubview:infoLabel];
     }
     UIImageView *myPhoto = [[UIImageView alloc] init];
-//     WithImage:[CCMe myData].myPhoto];
     myPhoto.tag = 20;
     [self.view addSubview:myPhoto];    
     UIInterfaceOrientation orientation = [UIApplication sharedApplication]. statusBarOrientation;
@@ -47,6 +46,17 @@
                                                  name:@"Download done"
                                                object:nil];
 }
+
+-(void) viewWillAppear:(BOOL)animated{
+    [self loadDataFromMyPage];
+}
+
+-(BOOL) isIntenetConnectionAvailable{
+    reachability = [Reachability reachabilityForInternetConnection];
+    BOOL is = !reachability.isConnectionRequired;
+    return is;
+}
+
 
 -(void) putDataToFields{
     FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase:@"42base.sqlite"]];
@@ -93,10 +103,6 @@
     myPhoto.image = [CCMe myData].myPhoto;
 }
 
--(void) viewWillAppear:(BOOL)animated{
-    [self loadDataFromMyPage];
-}
-
 -(void) loadDataFromMyPage{
     NSString *key = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
     NSFileManager *fManager = [NSFileManager defaultManager];
@@ -110,6 +116,7 @@
     [db open];
     if ([key isEqualToString:@"LoadNewData"]){
         if (FBSession.activeSession.isOpen) {
+            if ([self isIntenetConnectionAvailable]){
             [[FBRequest requestForMe] startWithCompletionHandler:
              ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
                  if (!error) {
@@ -132,6 +139,13 @@
             NSDictionary *localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
             [localToken writeToFile:[self getPathToDatabase:@"token"]
                          atomically:YES];
+            }else{
+                [[[UIAlertView alloc] initWithTitle:@"No internet"
+                                            message:@"Find Wifi or Cellular internet"
+                                           delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+            }
         }
     }else if ([key isEqualToString:@"UseOldData"]){
         [self putDataToFields];

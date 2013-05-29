@@ -9,12 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "FMResultSet.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "Reachability.h"
 
-@interface CCMainPage : UIViewController <FBUserSettingsDelegate>
+@interface CCMainPage : UIViewController <FBUserSettingsDelegate>{
+    Reachability *reachability;
+}
 
 -(void) changeViewFrames:(UIInterfaceOrientation) orientation;
 -(void) saveDataFromFB;
 -(NSString *) getPathToDatabase:(NSString *) string;
 -(void) loadDataFromMyPage;
+-(BOOL) isIntenetConnectionAvailable;
 
 @end
