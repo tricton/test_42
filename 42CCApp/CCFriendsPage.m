@@ -29,6 +29,8 @@
     UITableView *friendsTableView = [[UITableView alloc] initWithFrame:self.view.bounds
                                                                  style:UITableViewStylePlain];
     friendsTableView.tag = 60;
+    friendsTableView.dataSource = self;
+    friendsTableView.delegate = self;
     [self.view addSubview:friendsTableView];
 }
 
