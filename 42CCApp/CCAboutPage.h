@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CCAboutPage : UIViewController
+@interface CCAboutPage : UIViewController<UITextViewDelegate>
 
 @end
