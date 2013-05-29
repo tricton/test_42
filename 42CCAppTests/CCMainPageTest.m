@@ -65,6 +65,11 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             id dataSource = friendsTableView.dataSource;
             [dataSource shouldNotBeNil];
         });
+        it(@"On second page should present spinner as splash screen for show loading process", ^{
+            UIActivityIndicatorView *spinner = (UIActivityIndicatorView *)[friendsPage.view viewWithTag:70];
+            [spinner shouldNotBeNil];
+        
+        });
     });
 });
 
