@@ -18,15 +18,18 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             [db shouldNotBeNil];
         });
     });
-    context(@"TabBar controller must appear on the screen with one tab - Main", ^{
+    context(@"TabBar controller must appear on the screen with two tabs", ^{
         __block NSArray *controllers = [appDelegate tabBarController].viewControllers;
-        UITabBarItem *item = [appDelegate tabBarController].tabBar.items[0];
         FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase:@"42base.sqlite"]];
         [db open];
         it(@"Main view controller should be add to tab bar controller's array. Tab bar should have picture and title",^{
-            [controllers[0] shouldNotBeNil];
-            [item.title shouldNotBeNil];
-            [item.image shouldNotBeNil];
+            [[theValue([controllers count]) should] equal:theValue(2)];
+            for (int tab=0; tab<[controllers count]; tab++){
+                UITabBarItem *item = [appDelegate tabBarController].tabBar.items[tab];
+                [controllers[tab] shouldNotBeNil];
+                [item.title shouldNotBeNil];
+                [item.image shouldNotBeNil];
+            }
         });
         it(@"Fields with data should be editable", ^{
             NSMutableArray *results = [NSMutableArray array];
