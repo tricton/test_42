@@ -51,8 +51,8 @@ describe(@"After application start controller CCFBLogin must be active", ^{
                 [[expectFutureValue(userInfo) shouldEventuallyBeforeTimingOutAfter(3.0)] shouldNotBeNil];
             });
         });
-        it(@"", ^{
-            
+        it(@"We should have internet to work with app", ^{
+            [[theValue([mainPage isIntenetConnectionAvailable]) should] equal:theValue(YES)];
         });
     });
 });
