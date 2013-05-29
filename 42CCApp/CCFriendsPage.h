@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CCFriendsPage : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface CCFriendsPage : UIViewController
 
 @end
