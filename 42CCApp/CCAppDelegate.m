@@ -1,6 +1,7 @@
 #import "CCAppDelegate.h"
 #import "CCMe.h"
 #import "CCMainPage.h"
+#import "CCAboutPage.h"
 #import <FacebookSDK/FBSessionTokenCachingStrategy.h>
 #import "FBLoginView+session.h"
 
@@ -24,15 +25,19 @@
 //    [self loadDataFromBase];
     
     CCMainPage *mainPage = [[CCMainPage alloc] init];
+    CCAboutPage *aboutPage = [[CCAboutPage alloc] init];
     loginController = [[CCFBLogin alloc] init];
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.delegate = self;
-    [self.tabBarController setViewControllers: @[mainPage]];
+    [self.tabBarController setViewControllers: @[mainPage, aboutPage]];
     
-    UITabBarItem *mainTab = self.tabBarController.tabBar.items[0];
-    mainTab.image = [UIImage imageNamed:@"me"];
-    mainTab.title = @"About";
+    NSArray *titles = @[@"Me", @"About"];
+    for (int tab=0; tab<[self.tabBarController.viewControllers count]; tab++){
+        UITabBarItem *mainTab = self.tabBarController.tabBar.items[tab];
+        mainTab.image = [UIImage imageNamed:titles[tab]];
+        mainTab.title = titles[tab];
+    }
     
     loginView = (FBLoginView *)[loginController.view viewWithTag:30];
     if ([loginView session].isOpen){
