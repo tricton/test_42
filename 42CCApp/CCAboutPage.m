@@ -39,7 +39,6 @@
          replacementText:(NSString *)text{
     if ([text isEqualToString:@"\n"]){
         [textView resignFirstResponder];
-//        [self saveAboutData:textView.text];
     }
     return YES;
 }

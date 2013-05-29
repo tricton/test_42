@@ -1,14 +1,12 @@
 #import "CCAppDelegate.h"
 #import "CCMe.h"
-#import "CCMainPage.h"
 #import "CCAboutPage.h"
-#import "CCFriendsPage.h"
-#import <FacebookSDK/FBSessionTokenCachingStrategy.h>
+//#import <FacebookSDK/FBSessionTokenCachingStrategy.h>
 #import "FBLoginView+session.h"
 
 @implementation CCAppDelegate
 
-@synthesize tabBarController, session, loginController;
+@synthesize tabBarController, session, loginController, friendsPage;
 
 -(BOOL) application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -23,10 +21,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//    [self loadDataFromBase];
-    
-    CCMainPage *mainPage = [[CCMainPage alloc] init];
-    CCFriendsPage *friendsPage = [[CCFriendsPage alloc] init];
+    mainPage = [[CCMainPage alloc] init];
+    self.friendsPage = [[FBFriendPickerViewController alloc] init];
+    self.friendsPage.delegate = self;
     CCAboutPage *aboutPage = [[CCAboutPage alloc] init];
     loginController = [[CCFBLogin alloc] init];
     
@@ -51,6 +48,16 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(void) tabBarController:(UITabBarController *)tabBarController
+ didSelectViewController:(UIViewController *)viewController{
+    if (viewController == friendsPage){
+        [self.friendsPage loadData];
+        if (![mainPage isIntenetConnectionAvailable]){
+            [mainPage showAlertWithoutInternet];;
+        }
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application{

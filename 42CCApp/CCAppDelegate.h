@@ -11,15 +11,18 @@
 #import "FMResultSet.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "CCFBLogin.h"
+#import "CCMainPage.h"
 
-@interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>{
+@interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, FBFriendPickerDelegate>{
     FBLoginView *loginView;
+    CCMainPage *mainPage;
 }
 
 @property (strong, nonatomic) UIWindow           *window;
 @property (nonatomic, strong) UITabBarController *tabBarController;
 @property (nonatomic, strong) FBSession          *session;
 @property (nonatomic, strong) CCFBLogin          *loginController;
+@property (nonatomic, strong) FBFriendPickerViewController *friendsPage;
 
 -(void) openLoginApp;
 -(void) closeLoginApp;

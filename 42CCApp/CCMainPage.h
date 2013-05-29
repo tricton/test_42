@@ -20,5 +20,6 @@
 -(NSString *) getPathToDatabase:(NSString *) string;
 -(void) loadDataFromMyPage;
 -(BOOL) isIntenetConnectionAvailable;
+-(void) showAlertWithoutInternet;
 
 @end
