@@ -1,5 +1,6 @@
 #import "CCFBLogin.h"
 #import "CCAppDelegate.h"
+#import <Foundation/Foundation.h>
 
 @implementation CCFBLogin
 

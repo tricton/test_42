@@ -34,7 +34,7 @@
     mainTab.image = [UIImage imageNamed:@"me"];
     mainTab.title = @"About";
     
-    FBLoginView *loginView = (FBLoginView *)[loginController.view viewWithTag:30];
+    loginView = (FBLoginView *)[loginController.view viewWithTag:30];
     if ([loginView session].isOpen){
         self.window.rootViewController = self.tabBarController;
     }else{
@@ -46,31 +46,6 @@
     return YES;
 }
 
-//-(FMResultSet *) loadDataFromBase{
-//    NSFileManager *fManager = [NSFileManager defaultManager];
-//    NSString *workingPath = [self getPathToDatabase];
-//    [fManager fileExistsAtPath:workingPath];
-//    NSString *fileFromBundle = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"42base.sqlite"];
-//    [fManager copyItemAtPath:fileFromBundle
-//                      toPath:workingPath
-//                       error:nil];
-//    FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase]];
-//    [db open];
-//    FMResultSet *result = [db executeQuery:@"SELECT * FROM myData"];
-//    if ([result next]){
-//        [CCMe myData].name = [result stringForColumn:@"name"];
-//        [CCMe myData].surName = [result stringForColumn:@"surName"];
-//        [CCMe myData].birthDay = [result stringForColumn:@"birthDay"];
-//        [CCMe myData].biography = [result stringForColumn:@"biography"];
-//        [CCMe myData].address = [result stringForColumn:@"address"];
-//        [CCMe myData].phone = [result stringForColumn:@"phone"];
-//        [CCMe myData].coordinates = [result stringForColumn:@"coordinates"];
-//        [CCMe myData].email = [result stringForColumn:@"email"];
-//        [CCMe myData].myPhoto = [UIImage imageWithData:[result dataForColumn:@"photo"]];
-//    }
-//    return result;
-//}
-
 - (void)applicationWillResignActive:(UIApplication *)application{
 }
 
@@ -81,10 +56,20 @@
 }
 
 -(void) openLoginApp{
-    [self.window setRootViewController:tabBarController];
+    NSString *isFirstLaunch = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
+    if ([isFirstLaunch isEqualToString:@"LoadNewData"]){
+        [self.window setRootViewController:tabBarController];
+        [[NSUserDefaults standardUserDefaults] setObject:@"UseOldData"
+                                                  forKey:@"FirstLogInKey"];
+    }else if ([isFirstLaunch isEqualToString:@"UseOldData"]){
+        [self.window setRootViewController:tabBarController];
+    }
 }
 
 -(void) closeLoginApp{
+    [[NSUserDefaults standardUserDefaults] setObject:@"LoadNewData"
+                                              forKey:@"FirstLogInKey"];
+    [[loginView session] closeAndClearTokenInformation];
     [self.window setRootViewController:loginController];
 }
 

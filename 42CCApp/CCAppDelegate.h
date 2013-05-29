@@ -13,6 +13,7 @@
 #import "CCFBLogin.h"
 
 @interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>{
+    FBLoginView *loginView;
 }
 
 @property (strong, nonatomic) UIWindow           *window;

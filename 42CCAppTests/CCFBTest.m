@@ -37,16 +37,16 @@ describe(@"After application start controller CCFBLogin must be active", ^{
             it(@"Propertys in CCMe should conform to appropropriate propertys in FBGraphUser. If session is open then load data from web, check it from key in NSUserDefaults", ^{
                 __block NSString *key = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
                 __block NSDictionary *userInfo;
-                if (FBSession.activeSession.isOpen) {
+                if ([FBSession activeSession].isOpen) {
                     [[FBRequest requestForMe] startWithCompletionHandler:
                      ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
                          if (!error) {
                              userInfo = user;
                          }
                      }];
-                    [[key should] equal:@"OpenSession"];
+                    [[key should] equal:@"UseOldData"];
                 }else{
-                    [[key should] equal:@"CloseSession"];
+                    [[key should] equal:@"LoadNewData"];
                 }
                 [[expectFutureValue(userInfo) shouldEventuallyBeforeTimingOutAfter(3.0)] shouldNotBeNil];
             });

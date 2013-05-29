@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "FMResultSet.h"
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface CCMainPage : UIViewController
+@interface CCMainPage : UIViewController <FBUserSettingsDelegate>
 
 -(void) changeViewFrames:(UIInterfaceOrientation) orientation;
 -(void) saveDataFromFB;
 -(NSString *) getPathToDatabase:(NSString *) string;
--(FMResultSet *) loadDataFromMyPage;
-
+-(void) loadDataFromMyPage;
 
 @end

@@ -1,6 +1,5 @@
 #import "CCMainPage.h"
 #import "CCMe.h"
-#import <FacebookSDK/FacebookSDK.h>
 #import "CCFBLogin.h"
 #import "FMDatabase.h"
 #import "CCAppDelegate.h"
@@ -22,8 +21,14 @@
 }
 
 - (void)viewDidLoad{
-    
-
+    UIButton *logOutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    logOutButton.tag = 40;
+    [logOutButton setTitle:@"Log Out"
+                  forState:UIControlStateNormal];
+    [logOutButton addTarget:appDelegate
+                     action:@selector(closeLoginApp)
+           forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:logOutButton];
     for (int label=0; label<4; label++){
         UILabel *infoLabel = [[UILabel alloc] init];
         infoLabel.tag = label+10;
@@ -44,6 +49,17 @@
 }
 
 -(void) putDataToFields{
+    FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase:@"42base.sqlite"]];
+    [db open];
+    FMResultSet *result = [db executeQuery:@"SELECT * FROM FBData"];
+    if ([result next]){
+        [CCMe myData].name = [result stringForColumn:@"name"];
+        [CCMe myData].surName = [result stringForColumn:@"surName"];
+        [CCMe myData].birthDay = [result stringForColumn:@"birthday"];
+        [CCMe myData].biography = [result stringForColumn:@"biography"];
+        [CCMe myData].contact = [result stringForColumn:@"contact"];
+        [CCMe myData].myPhoto = [UIImage imageWithData:[result dataForColumn:@"photo"]];
+    }
     NSMutableArray *labelText = [NSMutableArray array];
     NSString *name = [NSString stringWithFormat:@"%@ %@", [CCMe myData].name, [CCMe myData].surName ];
     if (name){
@@ -81,7 +97,8 @@
     [self loadDataFromMyPage];
 }
 
--(FMResultSet *) loadDataFromMyPage{
+-(void) loadDataFromMyPage{
+    NSString *key = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
     NSFileManager *fManager = [NSFileManager defaultManager];
     NSString *workingPath = [self getPathToDatabase:@"42base.sqlite"];
     [fManager fileExistsAtPath:workingPath];
@@ -91,41 +108,34 @@
                        error:nil];
     FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase:@"42base.sqlite"]];
     [db open];
-    __block FMResultSet *result;
-    if (FBSession.activeSession.isOpen) {
-        [[FBRequest requestForMe] startWithCompletionHandler:
-         ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
-             if (!error) {
-                 [db executeUpdate:@"DELETE FROM FBData"];
-                 FBProfilePictureView *pictureView = [[FBProfilePictureView alloc] initWithProfileID:user.id
-                                                                                     pictureCropping:FBProfilePictureCroppingOriginal];
-                 UIImageView *imageView = nil;
-                 for (id obj in [pictureView subviews]){
-                     if ([obj isMemberOfClass:[UIImageView class]]){
-                         imageView = (UIImageView *)obj;
+    if ([key isEqualToString:@"LoadNewData"]){
+        if (FBSession.activeSession.isOpen) {
+            [[FBRequest requestForMe] startWithCompletionHandler:
+             ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+                 if (!error) {
+                     [db executeUpdate:@"DELETE FROM FBData"];
+                     FBProfilePictureView *pictureView = [[FBProfilePictureView alloc] initWithProfileID:user.id
+                                                                                         pictureCropping:FBProfilePictureCroppingOriginal];
+                     UIImageView *imageView = nil;
+                     for (id obj in [pictureView subviews]){
+                         if ([obj isMemberOfClass:[UIImageView class]]){
+                             imageView = (UIImageView *)obj;
+                         }
                      }
+                     NSData *pic = UIImagePNGRepresentation(imageView.image);
+                     [db executeUpdate:@"insert into FBData (name, surName, biography, contact, birthday, photo) values (?,?,?,?,?,?)", [user objectForKey:@"first_name"], [user objectForKey:@"last_name"], [user objectForKey:@"bio"], [user objectForKey:@"email"], [user objectForKey:@"birthday"], pic];
+                     [[NSNotificationCenter defaultCenter] postNotificationName:@"Download done"
+                                                                         object:nil];
                  }
-                 NSData *pic = UIImagePNGRepresentation(imageView.image);
-                 [db executeUpdate:@"insert into FBData (name, surName, biography, contact, birthday, photo) values (?,?,?,?,?,?)", [user objectForKey:@"first_name"], [user objectForKey:@"last_name"], [user objectForKey:@"bio"], [user objectForKey:@"email"], [user objectForKey:@"birthday"], pic];
-                 result = [db executeQuery:@"SELECT * FROM FBData"];
-                 if ([result next]){
-                     [CCMe myData].name = [result stringForColumn:@"name"];
-                     [CCMe myData].surName = [result stringForColumn:@"surName"];
-                     [CCMe myData].birthDay = [result stringForColumn:@"birthday"];
-                     [CCMe myData].biography = [result stringForColumn:@"biography"];
-                     [CCMe myData].contact = [result stringForColumn:@"contact"];
-                     [CCMe myData].myPhoto = [UIImage imageWithData:[result dataForColumn:@"photo"]];
-                 }
-                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Download done"
-                                                                     object:nil];
-             }
-         }];
-        FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
-        NSDictionary *localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
-        [localToken writeToFile:[self getPathToDatabase:@"token"]
-                     atomically:YES];
+             }];
+            FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
+            NSDictionary *localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
+            [localToken writeToFile:[self getPathToDatabase:@"token"]
+                         atomically:YES];
+        }
+    }else if ([key isEqualToString:@"UseOldData"]){
+        [self putDataToFields];
     }
-    return result;
 }
 
 -(NSString *) getPathToDatabase:(NSString *) string{
@@ -141,8 +151,10 @@
 
 -(void) changeViewFrames:(UIInterfaceOrientation) orientation{
     UIImageView *myPhoto = (UIImageView *)[self.view viewWithTag:20];
+    UIButton *logOutButton = (UIButton *)[self.view viewWithTag:40];
     if (UIInterfaceOrientationIsPortrait(orientation)){
         myPhoto.frame = CGRectMake(96, 20, 128, 128);
+        logOutButton.frame = CGRectMake(0, 0, 80, 40);
         for (int label=0; label<4; label++){
             UILabel *infoLabel = (UILabel *)[self.view viewWithTag:label+10];
             if (label<2){
@@ -155,6 +167,7 @@
         }
     }else{        
         myPhoto.frame = CGRectMake(20, 20, 128, 128);
+        logOutButton.frame = CGRectMake(0, 150, 80, 40);
         for (int label=0; label<4; label++){
             UILabel *infoLabel = (UILabel *)[self.view viewWithTag:label+10];
             if (label < 2){
