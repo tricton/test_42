@@ -30,10 +30,8 @@
            forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logOutButton];
     for (int label=0; label<4; label++){
-        UILabel *infoLabel = [[UILabel alloc] init];
+        UITextView *infoLabel = [[UITextView alloc] init];
         infoLabel.tag = label+10;
-        infoLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        infoLabel.numberOfLines = 0;
         [self.view addSubview:infoLabel];
     }
     UIImageView *myPhoto = [[UIImageView alloc] init];
