@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface CCFriendsPage : UIViewController
+@interface CCFriendsPage : UIViewController <FBFriendPickerDelegate>
+
+@property (nonatomic, strong) FBFriendPickerViewController *friendPickerController;
 
 @end

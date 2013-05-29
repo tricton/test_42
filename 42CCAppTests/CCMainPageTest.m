@@ -58,10 +58,8 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             [[aboutField.text should] equal:about];
         });
         it(@"On second tab should present table view", ^{
-            FBFriendPickerViewController *friendsTableView = (FBFriendPickerViewController *)[friendsPage.view viewWithTag:60];
-            [friendsTableView shouldNotBeNil];
-            id delegate = friendsTableView.delegate;
-            [delegate shouldNotBeNil];
+            [[friendsPage friendPickerController] shouldNotBeNil];
+
         });
         it(@"On second page should present spinner as splash screen for show loading process", ^{
             UIActivityIndicatorView *spinner = (UIActivityIndicatorView *)[friendsPage.view viewWithTag:70];
