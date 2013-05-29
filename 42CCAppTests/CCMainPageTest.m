@@ -12,7 +12,7 @@ SPEC_BEGIN(startApp)
 
 describe(@"Application should create a FMDB entity to work with database", ^{
     __block CCMainPage *mainPage = (CCMainPage *) [appDelegate tabBarController].viewControllers[0];
-    __block CCAboutPage *aboutPage = (CCAboutPage *)[appDelegate tabBarController].viewControllers[1];
+    __block CCAboutPage *aboutPage = (CCAboutPage *)[appDelegate tabBarController].viewControllers[2];
     __block FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase:@"42base.sqlite"]];
     context(@"Entity of FMDB must read database from file", ^{
         [db open];

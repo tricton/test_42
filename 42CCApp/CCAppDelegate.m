@@ -2,6 +2,7 @@
 #import "CCMe.h"
 #import "CCMainPage.h"
 #import "CCAboutPage.h"
+#import "CCFriendsPage.h"
 #import <FacebookSDK/FBSessionTokenCachingStrategy.h>
 #import "FBLoginView+session.h"
 
@@ -25,14 +26,15 @@
 //    [self loadDataFromBase];
     
     CCMainPage *mainPage = [[CCMainPage alloc] init];
+    CCFriendsPage *friendsPage = [[CCFriendsPage alloc] init];
     CCAboutPage *aboutPage = [[CCAboutPage alloc] init];
     loginController = [[CCFBLogin alloc] init];
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.delegate = self;
-    [self.tabBarController setViewControllers: @[mainPage, aboutPage]];
+    [self.tabBarController setViewControllers: @[mainPage, friendsPage, aboutPage]];
     
-    NSArray *titles = @[@"Me", @"About"];
+    NSArray *titles = @[@"Me", @"Friends", @"About"];
     for (int tab=0; tab<[self.tabBarController.viewControllers count]; tab++){
         UITabBarItem *mainTab = self.tabBarController.tabBar.items[tab];
         mainTab.image = [UIImage imageNamed:titles[tab]];
