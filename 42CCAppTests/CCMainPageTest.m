@@ -21,17 +21,28 @@ describe(@"Application should create a FMDB entity to work with database", ^{
     context(@"TabBar controller must appear on the screen with one tab - Main", ^{
         __block NSArray *controllers = [appDelegate tabBarController].viewControllers;
         UITabBarItem *item = [appDelegate tabBarController].tabBar.items[0];
+        FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase:@"42base.sqlite"]];
+        [db open];
+        __block FMResultSet *result = [db executeQuery:@"SELECT * FROM FBData"];
         it(@"Main view controller should be add to tab bar controller's array. Tab bar should have picture and title",^{
             [controllers[0] shouldNotBeNil];
             [item.title shouldNotBeNil];
             [item.image shouldNotBeNil];
         });
-    });
-    it(@"Fields with data should be editable", ^{
-        for(int field=0; field<4; field++){
-            UITextView *infoField = (UITextView *)[mainPage.view viewWithTag:field+10];
-            [[theValue(infoField.editable) should] equal:theValue(YES)];
-        }
+        it(@"Fields with data should be editable", ^{
+            NSMutableArray *results = [NSMutableArray array];
+            if ([result next]){
+                [results addObject:[NSString stringWithFormat:@"%@ %@", [result stringForColumn:@"name"], [result stringForColumn:@"surName"]]];
+                [results addObject:[result stringForColumn:@"birthday"]];
+                [results addObject:[result stringForColumn:@"biography"]];
+                [results addObject:[result stringForColumn:@"contact"]];
+            }
+            for(int field=0; field<4; field++){
+                UITextView *infoField = (UITextView *)[mainPage.view viewWithTag:field+10];
+                [[theValue(infoField.editable) should] equal:theValue(YES)];
+                [[infoField.text should] equal:[results objectAtIndex:field]];
+            }
+        });
     });
 });
 
