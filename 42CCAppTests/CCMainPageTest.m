@@ -20,12 +20,12 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             [db shouldNotBeNil];
         });
     });
-    context(@"TabBar controller must appear on the screen with two tabs", ^{
+    context(@"TabBar controller must appear on the screen with three tabs", ^{
         __block NSArray *controllers = [appDelegate tabBarController].viewControllers;
         FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase:@"42base.sqlite"]];
         [db open];
         it(@"Main view controller should be add to tab bar controller's array. Tab bar should have picture and title",^{
-            [[theValue([controllers count]) should] equal:theValue(2)];
+            [[theValue([controllers count]) should] equal:theValue(3)];
             for (int tab=0; tab<[controllers count]; tab++){
                 UITabBarItem *item = [appDelegate tabBarController].tabBar.items[tab];
                 [controllers[tab] shouldNotBeNil];
