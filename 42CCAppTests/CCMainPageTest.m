@@ -60,6 +60,10 @@ describe(@"Application should create a FMDB entity to work with database", ^{
         it(@"On second tab should present table view", ^{
             UITableView *friendsTableView = (UITableView *)[friendsPage.view viewWithTag:60];
             [friendsTableView shouldNotBeNil];
+            id delegate = friendsTableView.delegate;
+            [delegate shouldNotBeNil];
+            id dataSource = friendsTableView.dataSource;
+            [dataSource shouldNotBeNil];
         });
     });
 });
