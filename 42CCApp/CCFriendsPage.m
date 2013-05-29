@@ -26,7 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    UITableView *friendsTableView = [[UITableView alloc] initWithFrame:self.view.bounds
+                                                                 style:UITableViewStylePlain];
+    friendsTableView.tag = 60;
+    [self.view addSubview:friendsTableView];
 }
 
 - (void)didReceiveMemoryWarning
