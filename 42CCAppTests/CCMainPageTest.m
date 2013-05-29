@@ -5,14 +5,17 @@
 #import "CCMe.h"
 #import "CCMainPage.h"
 #import "CCAboutPage.h"
+#import "CCFriendsPage.h"
 
 #define appDelegate (CCAppDelegate *)[[UIApplication sharedApplication] delegate]
 
 SPEC_BEGIN(startApp)
 
 describe(@"Application should create a FMDB entity to work with database", ^{
-    __block CCMainPage *mainPage = (CCMainPage *) [appDelegate tabBarController].viewControllers[0];
-    __block CCAboutPage *aboutPage = (CCAboutPage *)[appDelegate tabBarController].viewControllers[2];
+    __block NSArray *controllers = [appDelegate tabBarController].viewControllers;
+    __block CCMainPage *mainPage = (CCMainPage *)controllers[0];
+    __block CCFriendsPage *friendsPage = (CCFriendsPage *)controllers[1];
+    __block CCAboutPage *aboutPage = (CCAboutPage *)controllers[2];
     __block FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase:@"42base.sqlite"]];
     context(@"Entity of FMDB must read database from file", ^{
         [db open];
@@ -21,7 +24,6 @@ describe(@"Application should create a FMDB entity to work with database", ^{
         });
     });
     context(@"TabBar controller must appear on the screen with three tabs", ^{
-        __block NSArray *controllers = [appDelegate tabBarController].viewControllers;
         FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase:@"42base.sqlite"]];
         [db open];
         it(@"Main view controller should be add to tab bar controller's array. Tab bar should have picture and title",^{
@@ -49,11 +51,15 @@ describe(@"Application should create a FMDB entity to work with database", ^{
                 [[text should] equal:results[field]];
             }
         });
-        it(@"On second tab should be UITextView", ^{
+        it(@"On third tab should be UITextView", ^{
             UITextView *aboutField = (UITextView *)[aboutPage.view viewWithTag:50];
             [aboutField shouldNotBeNil];
             NSString *about = [[NSUserDefaults standardUserDefaults] objectForKey:@"about"];
             [[aboutField.text should] equal:about];
+        });
+        it(@"On second tab should present table view", ^{
+            UITableView *friendsTableView = (UITableView *)[friendsPage.view viewWithTag:60];
+            [friendsTableView shouldNotBeNil];
         });
     });
 });
