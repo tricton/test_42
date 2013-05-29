@@ -27,6 +27,12 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             [item.image shouldNotBeNil];
         });
     });
+    it(@"Fields with data should be editable", ^{
+        for(int field=0; field<4; field++){
+            UITextField *infoField = (UITextField *)[mainPage.view viewWithTag:field+10];
+            [[theValue(infoField.editing) should] equal:theValue(YES)];
+        }
+    });
 });
 
 SPEC_END
