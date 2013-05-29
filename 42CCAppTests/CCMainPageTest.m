@@ -52,6 +52,8 @@ describe(@"Application should create a FMDB entity to work with database", ^{
         it(@"On second tab should be UITextView", ^{
             UITextView *aboutField = (UITextView *)[aboutPage.view viewWithTag:50];
             [aboutField shouldNotBeNil];
+            NSString *about = [[NSUserDefaults standardUserDefaults] objectForKey:@"about"];
+            [[aboutField.text should] equal:about];
         });
     });
 });
