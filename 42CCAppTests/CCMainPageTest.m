@@ -4,6 +4,7 @@
 #import "CCAppDelegate.h"
 #import "CCMe.h"
 #import "CCMainPage.h"
+#import "CCAboutPage.h"
 
 #define appDelegate (CCAppDelegate *)[[UIApplication sharedApplication] delegate]
 
@@ -11,6 +12,7 @@ SPEC_BEGIN(startApp)
 
 describe(@"Application should create a FMDB entity to work with database", ^{
     __block CCMainPage *mainPage = (CCMainPage *) [appDelegate tabBarController].viewControllers[0];
+    __block CCAboutPage *aboutPage = (CCAboutPage *)[appDelegate tabBarController].viewControllers[1];
     __block FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase:@"42base.sqlite"]];
     context(@"Entity of FMDB must read database from file", ^{
         [db open];
@@ -31,7 +33,7 @@ describe(@"Application should create a FMDB entity to work with database", ^{
                 [item.image shouldNotBeNil];
             }
         });
-        it(@"Fields with data should be editable", ^{
+        it(@"Fields with data should be editable on main page", ^{
             NSMutableArray *results = [NSMutableArray array];
             FMResultSet *result = [db executeQuery:@"SELECT * FROM FBData"];
             if ([result next]){
@@ -46,6 +48,10 @@ describe(@"Application should create a FMDB entity to work with database", ^{
                 NSString *text = infoField.text;
                 [[text should] equal:results[field]];
             }
+        });
+        it(@"On second tab should be UITextView", ^{
+            UITextView *aboutField = (UITextView *)[aboutPage.view viewWithTag:50];
+            [aboutField shouldNotBeNil];
         });
     });
 });
