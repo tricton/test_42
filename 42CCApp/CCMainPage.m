@@ -32,6 +32,8 @@
     for (int label=0; label<4; label++){
         UITextView *infoLabel = [[UITextView alloc] init];
         infoLabel.tag = label+10;
+        infoLabel.returnKeyType = UIReturnKeyDone;
+        infoLabel.delegate = self;
         [self.view addSubview:infoLabel];
     }
     UIImageView *myPhoto = [[UIImageView alloc] init];
@@ -168,7 +170,7 @@
         myPhoto.frame = CGRectMake(96, 20, 128, 128);
         logOutButton.frame = CGRectMake(0, 0, 80, 40);
         for (int label=0; label<4; label++){
-            UILabel *infoLabel = (UILabel *)[self.view viewWithTag:label+10];
+            UITextView *infoLabel = (UITextView *)[self.view viewWithTag:label+10];
             if (label<2){
                 infoLabel.frame = CGRectMake(50, 160+label*30, 220, 20);
             }else{
@@ -181,7 +183,7 @@
         myPhoto.frame = CGRectMake(20, 20, 128, 128);
         logOutButton.frame = CGRectMake(0, 150, 80, 40);
         for (int label=0; label<4; label++){
-            UILabel *infoLabel = (UILabel *)[self.view viewWithTag:label+10];
+            UITextView *infoLabel = (UITextView *)[self.view viewWithTag:label+10];
             if (label < 2){
                 infoLabel.frame = CGRectMake(20, 160+label*30, 128, 20);
             }else{
@@ -193,7 +195,7 @@
     }
 }
 
--(float) sizeOfFont:(UILabel *) label{
+-(float) sizeOfFont:(UITextView *) label{
     float fontSize = label.font.pointSize;
     while ([self dicrementFont:label]) {
         fontSize--;
@@ -202,7 +204,7 @@
     return fontSize;
 }
 
--(BOOL) dicrementFont:(UILabel *) label{
+-(BOOL) dicrementFont:(UITextView *) label{
     float fontSize = label.font.pointSize;
     CGSize needSize = [label.text sizeWithFont:[UIFont systemFontOfSize:fontSize]
                              constrainedToSize:CGSizeMake(label.frame.size.width, 10000)
@@ -216,8 +218,27 @@
     }
 }
 
--(void) saveDataFromFB{
+-(BOOL)         textView:(UITextView *)textView
+ shouldChangeTextInRange:(NSRange)range
+         replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){
+        [textView resignFirstResponder];
+        [self saveDataFromFB];
+    }
+    return YES;
+}
 
+-(void) saveDataFromFB{
+    NSMutableArray *texts = [NSMutableArray array];
+    for (int label=0; label<4; label++){
+        UITextView *infoLabel = (UITextView *)[self.view viewWithTag:label+10];
+        [texts addObject:infoLabel.text];
+    }
+    NSArray *names = [texts[0] componentsSeparatedByString:@" "];
+    FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase:@"42base.sqlite"]];
+    [db open];
+    [db executeUpdate:@"UPDATE FBData SET name=?, surName=?, birthday=?, biography=?, contact=?", names[0], names [1], texts[1], texts[2], texts[3]];
+    
 }
 
 

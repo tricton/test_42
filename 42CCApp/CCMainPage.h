@@ -11,7 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "Reachability.h"
 
-@interface CCMainPage : UIViewController <FBUserSettingsDelegate>{
+@interface CCMainPage : UIViewController <FBUserSettingsDelegate, UITextViewDelegate, UITextFieldDelegate>{
     Reachability *reachability;
 }
 
