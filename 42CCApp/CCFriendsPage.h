@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) FBFriendPickerViewController *friendPickerController;
 
+-(void) allocatingFriendsViewController;
+
 @end

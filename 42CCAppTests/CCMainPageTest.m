@@ -57,8 +57,11 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             NSString *about = [[NSUserDefaults standardUserDefaults] objectForKey:@"about"];
             [[aboutField.text should] equal:about];
         });
-        it(@"On second tab should present table view", ^{
+        it(@"On second tab should present table view with friends", ^{
+            [friendsPage allocatingFriendsViewController];
             [[friendsPage friendPickerController] shouldNotBeNil];
+            id delegate = [friendsPage friendPickerController];
+            [delegate shouldNotBeNil];
 
         });
         it(@"On second page should present spinner as splash screen for show loading process", ^{
