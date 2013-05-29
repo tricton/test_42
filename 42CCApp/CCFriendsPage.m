@@ -32,6 +32,9 @@
     friendsTableView.dataSource = self;
     friendsTableView.delegate = self;
     [self.view addSubview:friendsTableView];
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.tag = 70;
+    [self.view addSubview:spinner];
 }
 
 - (void)didReceiveMemoryWarning
