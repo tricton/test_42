@@ -125,29 +125,32 @@
                 spinner.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
                 [self.view addSubview:spinner];
                 [spinner startAnimating];
+                FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
+                NSDictionary *localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
+                [localToken writeToFile:[self getPathToDatabase:@"token"]
+                             atomically:YES];
+                __block NSString *token = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
                 [[FBRequest requestForMe] startWithCompletionHandler:
                  ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
                      if (!error) {
                          [db executeUpdate:@"DELETE FROM FBData"];
-                         FBProfilePictureView *pictureView = [[FBProfilePictureView alloc] initWithProfileID:user.id
-                                                                                             pictureCropping:FBProfilePictureCroppingOriginal];
-                         UIImageView *imageView = nil;
-                         for (id obj in [pictureView subviews]){
-                             if ([obj isMemberOfClass:[UIImageView class]]){
-                                 imageView = (UIImageView *)obj;
-                             }
-                         }
-                         NSData *pic = UIImagePNGRepresentation(imageView.image);
+                         NSString *pictureLinkHeader = @"https://graph.facebook.com/me/?access_token=";
+                         NSString *pictureLinklEnd = @"&fields=picture";
+                         NSString *finalLink = [NSString stringWithFormat:@"%@%@%@", pictureLinkHeader, token, pictureLinklEnd];
+                         NSData *myData =  [NSData dataWithContentsOfURL:[NSURL URLWithString:finalLink]];
+                         NSDictionary *dictResult = [NSJSONSerialization JSONObjectWithData:myData
+                                                                             options:kNilOptions
+                                                                               error:nil];;
+                         NSString *pictureUrl = [[[dictResult objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+                         NSData *pic = [NSData dataWithContentsOfURL:[NSURL URLWithString:pictureUrl]];
                          [db executeUpdate:@"insert into FBData (name, surName, biography, contact, birthday, photo) values (?,?,?,?,?,?)", [user objectForKey:@"first_name"], [user objectForKey:@"last_name"], [user objectForKey:@"bio"], [user objectForKey:@"email"], [user objectForKey:@"birthday"], pic];
                          [[NSNotificationCenter defaultCenter] postNotificationName:@"Download done"
                                                                              object:nil];
                          [spinner stopAnimating];
                      }
                  }];
-            FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
-            NSDictionary *localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
-            [localToken writeToFile:[self getPathToDatabase:@"token"]
-                         atomically:YES];
+            
+
             }else{
                 [self showAlertWithoutInternet];
             }

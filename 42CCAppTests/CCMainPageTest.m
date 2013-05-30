@@ -14,7 +14,7 @@ SPEC_BEGIN(startApp)
 describe(@"Application should create a FMDB entity to work with database", ^{
     __block NSArray *controllers = [appDelegate tabBarController].viewControllers;
     __block CCMainPage *mainPage = (CCMainPage *)controllers[0];
-    __block FBFriendPickerViewController *friendsPage = (FBFriendPickerViewController *)controllers[1];
+    __block UINavigationController *friendsPage = (UINavigationController *)controllers[1];
     __block CCAboutPage *aboutPage = (CCAboutPage *)controllers[2];
     __block FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase:@"42base.sqlite"]];
     context(@"Entity of FMDB must read database from file", ^{
@@ -34,8 +34,6 @@ describe(@"Application should create a FMDB entity to work with database", ^{
                 [item.title shouldNotBeNil];
                 [item.image shouldNotBeNil];
             }
-            id delegate = [friendsPage delegate];
-            [delegate shouldNotBeNil];
         });
         it(@"On mainPage upon lazy load data from internet spinner must spin until data dowloading", ^{
             UIActivityIndicatorView *spinner = (UIActivityIndicatorView *)[mainPage.view viewWithTag:70];
@@ -47,10 +45,30 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             NSMutableArray *results = [NSMutableArray array];
             FMResultSet *result = [db executeQuery:@"SELECT * FROM FBData"];
             if ([result next]){
-                [results addObject:[NSString stringWithFormat:@"%@ %@", [result stringForColumn:@"name"], [result stringForColumn:@"surName"]]];
-                [results addObject:[result stringForColumn:@"birthday"]];
-                [results addObject:[result stringForColumn:@"biography"]];
-                [results addObject:[result stringForColumn:@"contact"]];
+                NSString *name = [NSString stringWithFormat:@"%@ %@", [result stringForColumn:@"name"], [result stringForColumn:@"surName"]];
+                NSString *birthday = [result stringForColumn:@"birthday"];
+                NSString *bio = [result stringForColumn:@"biography"];
+                NSString *email = [result stringForColumn:@"contact"];
+                if (name){
+                    [results addObject:name];
+                }else{
+                    [results addObject:@""];
+                }
+                if (birthday){
+                    [results addObject:birthday];
+                }else{
+                    [results addObject:@""];
+                }
+                if (bio){
+                    [results addObject:bio];
+                }else{
+                    [results addObject:@""];
+                }
+                if (email){
+                    [results addObject:email];
+                }else{
+                    [results addObject:@""];
+                }
             }
             for(int field=0; field<4; field++){
                 UITextView *infoField = (UITextView *)[mainPage.view viewWithTag:field+10];
@@ -66,6 +84,12 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             if ([FBSession activeSession].isOpen){
                 [[aboutField.text should] equal:about];
             }
+        });
+        it(@"On second tab should present UISearchBar", ^{
+            UISearchBar *searchBar = (UISearchBar *)[friendsPage.view viewWithTag:80];
+            [searchBar shouldNotBeNil];
+            id delegate = searchBar.delegate;
+            [delegate shouldNotBeNil];
         });
     });
 });
