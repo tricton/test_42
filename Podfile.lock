@@ -1,17 +1,23 @@
 PODS:
+  - Facebook-iOS-SDK (3.5.1)
   - FMDB (2.0):
     - FMDB/standard
   - FMDB/common (2.0)
   - FMDB/standard (2.0):
     - FMDB/common
   - Kiwi (2.1)
+  - Reachability (3.1.0)
 
 DEPENDENCIES:
+  - Facebook-iOS-SDK
   - FMDB
   - Kiwi
+  - Reachability
 
 SPEC CHECKSUMS:
+  Facebook-iOS-SDK: 0dbd897e842cefeb012ec2eb8eba659ba6b96b12
   FMDB: 30a7cbcdbd354f5ee1ba081a8773fd9130c43b48
   Kiwi: 054ef97d0e50c279b21113a0880a906fa153a7fd
+  Reachability: ba94ecd4eaa037be3d0588b38956672588530c5b
 
 COCOAPODS: 0.19.1
