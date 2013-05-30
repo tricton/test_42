@@ -64,9 +64,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "127"
-         endingLineNumber = "127"
-         landmarkName = "-closeLoginApp"
-         landmarkType = "5">
+         endingLineNumber = "127">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -77,9 +75,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "115"
-         endingLineNumber = "115"
-         landmarkName = "-openLoginApp"
-         landmarkType = "5">
+         endingLineNumber = "115">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -176,7 +172,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "52"
          endingLineNumber = "52"
-         landmarkName = "-application:didFinishLaunchingWithOptions:"
+         landmarkName = "-applicationDidEnterBackground:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -189,8 +185,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "54"
          endingLineNumber = "54"
-         landmarkName = "-application:didFinishLaunchingWithOptions:"
-         landmarkType = "5">
+         landmarkName = "@implementation CCAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -812,7 +808,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "62"
          endingLineNumber = "62"
-         landmarkName = "-searchBarSearchButtonClicked:"
+         landmarkName = "-openLoginApp"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -825,8 +821,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "75"
          endingLineNumber = "75"
-         landmarkName = "-friendPickerViewController:shouldIncludeUser:"
-         landmarkType = "5">
+         landmarkName = "@implementation CCAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
