@@ -13,7 +13,7 @@
 #import "CCFBLogin.h"
 #import "CCMainPage.h"
 
-@interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, FBFriendPickerDelegate>{
+@interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, FBFriendPickerDelegate, UISearchBarDelegate>{
     FBLoginView *loginView;
     CCMainPage *mainPage;
 }
@@ -23,6 +23,7 @@
 @property (nonatomic, strong) FBSession          *session;
 @property (nonatomic, strong) CCFBLogin          *loginController;
 @property (nonatomic, strong) FBFriendPickerViewController *friendsPage;
+@property (nonatomic, strong) UINavigationController *navigationController;
 
 -(void) openLoginApp;
 -(void) closeLoginApp;

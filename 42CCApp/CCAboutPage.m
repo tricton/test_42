@@ -42,6 +42,7 @@
     }
     return YES;
 }
+
 -(void) saveAboutData:(NSString *) text{
     [[NSUserDefaults standardUserDefaults] setObject:text
                                               forKey:@"about"];
