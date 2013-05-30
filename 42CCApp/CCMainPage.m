@@ -34,6 +34,8 @@
         infoLabel.tag = label+10;
         infoLabel.returnKeyType = UIReturnKeyDone;
         infoLabel.delegate = self;
+        infoLabel.textAlignment = NSTextAlignmentCenter;
+        infoLabel.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:infoLabel];
     }
     UIImageView *myPhoto = [[UIImageView alloc] init];
@@ -184,7 +186,7 @@
     UIButton *logOutButton = (UIButton *)[self.view viewWithTag:40];
     if (UIInterfaceOrientationIsPortrait(orientation)){
         myPhoto.frame = CGRectMake(96, 20, 128, 128);
-        logOutButton.frame = CGRectMake(0, 0, 80, 40);
+        logOutButton.frame = CGRectMake(0, 0, 80, 20);
         for (int label=0; label<4; label++){
             UITextView *infoLabel = (UITextView *)[self.view viewWithTag:label+10];
             if (label<2){
@@ -197,7 +199,7 @@
         }
     }else{        
         myPhoto.frame = CGRectMake(20, 20, 128, 128);
-        logOutButton.frame = CGRectMake(0, 150, 80, 40);
+        logOutButton.frame = CGRectMake(0, 0, 80, 20);
         for (int label=0; label<4; label++){
             UITextView *infoLabel = (UITextView *)[self.view viewWithTag:label+10];
             if (label < 2){
