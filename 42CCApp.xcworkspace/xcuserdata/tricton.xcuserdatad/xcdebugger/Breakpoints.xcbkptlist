@@ -64,7 +64,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "127"
-         endingLineNumber = "127">
+         endingLineNumber = "127"
+         landmarkName = "-closeLoginApp"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -75,7 +77,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "115"
-         endingLineNumber = "115">
+         endingLineNumber = "115"
+         landmarkName = "-openLoginApp"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -130,11 +134,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391553963.126313"
+         timestampString = "391602149.61013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "75"
-         endingLineNumber = "75"
+         startingLineNumber = "77"
+         endingLineNumber = "77"
          landmarkName = "-putDataToFields"
          landmarkType = "5">
       </FileBreakpoint>
@@ -159,7 +163,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "52"
          endingLineNumber = "52"
-         landmarkName = "-applicationDidEnterBackground:"
+         landmarkName = "-application:didFinishLaunchingWithOptions:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -172,8 +176,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "54"
          endingLineNumber = "54"
-         landmarkName = "@implementation CCAppDelegate"
-         landmarkType = "3">
+         landmarkName = "-application:didFinishLaunchingWithOptions:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -224,11 +228,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391524476.376894"
+         timestampString = "391602149.61013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
          landmarkName = "-isIntenetConnectionAvailable"
          landmarkType = "5">
       </FileBreakpoint>
@@ -250,11 +254,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391600405.719483"
+         timestampString = "391602149.61013"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "261"
-         endingLineNumber = "261">
+         startingLineNumber = "263"
+         endingLineNumber = "263"
+         landmarkName = "@implementation CCMainPage"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -754,7 +760,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "62"
          endingLineNumber = "62"
-         landmarkName = "-openLoginApp"
+         landmarkName = "-searchBarSearchButtonClicked:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -767,8 +773,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "75"
          endingLineNumber = "75"
-         landmarkName = "@implementation CCAppDelegate"
-         landmarkType = "3">
+         landmarkName = "-friendPickerViewController:shouldIncludeUser:"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

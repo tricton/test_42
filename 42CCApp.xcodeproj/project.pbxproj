@@ -15,10 +15,13 @@
 		7E5209ED1750A49000BF6701 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5209EC1750A49000BF6701 /* Security.framework */; };
 		7E5209EF1750A49B00BF6701 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5209EE1750A49B00BF6701 /* Social.framework */; };
 		7E5209F41750C6E200BF6701 /* CCFBLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5209F31750C6E200BF6701 /* CCFBLogin.m */; };
+		7E6B983A17564DC9007DF00E /* About@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6B983917564DC9007DF00E /* About@2x.png */; };
+		7E6B983D175650BB007DF00E /* CCAboutPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B983C175650BB007DF00E /* CCAboutPage.m */; };
+		7E6B984217565E37007DF00E /* Friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6B984117565E37007DF00E /* Friends@2x.png */; };
 		7E6EFF79174E10B800833991 /* 42base.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 7E6EFF78174E10B800833991 /* 42base.sqlite */; };
 		7E6EFF7C174E1A1800833991 /* CCMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6EFF7B174E1A1700833991 /* CCMe.m */; };
 		7E6EFF7F174E214E00833991 /* CCMainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6EFF7E174E214E00833991 /* CCMainPage.m */; };
-		7E6EFF81174E26CE00833991 /* me@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6EFF80174E26CE00833991 /* me@2x.png */; };
+		7E6EFF81174E26CE00833991 /* Me@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6EFF80174E26CE00833991 /* Me@2x.png */; };
 		7E6EFF84174E27F400833991 /* CCTabBarTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6EFF83174E27F400833991 /* CCTabBarTest.m */; };
 		7EA8483C174DE461006FDB7B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA8483B174DE461006FDB7B /* UIKit.framework */; };
 		7EA8483E174DE461006FDB7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA8483D174DE461006FDB7B /* Foundation.framework */; };
@@ -58,12 +61,16 @@
 		7E5209F31750C6E200BF6701 /* CCFBLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFBLogin.m; sourceTree = "<group>"; };
 		7E634B66175285F2003059A9 /* FBProfilePictureView+getImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBProfilePictureView+getImage.h"; sourceTree = "<group>"; };
 		7E634B691753DCA7003059A9 /* FBLoginView+session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBLoginView+session.h"; sourceTree = "<group>"; };
+		7E6B983917564DC9007DF00E /* About@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "About@2x.png"; sourceTree = "<group>"; };
+		7E6B983B175650BB007DF00E /* CCAboutPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAboutPage.h; sourceTree = "<group>"; };
+		7E6B983C175650BB007DF00E /* CCAboutPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAboutPage.m; sourceTree = "<group>"; };
+		7E6B984117565E37007DF00E /* Friends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Friends@2x.png"; sourceTree = "<group>"; };
 		7E6EFF78174E10B800833991 /* 42base.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = 42base.sqlite; sourceTree = "<group>"; };
 		7E6EFF7A174E1A1700833991 /* CCMe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMe.h; sourceTree = "<group>"; };
 		7E6EFF7B174E1A1700833991 /* CCMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMe.m; sourceTree = "<group>"; };
 		7E6EFF7D174E214E00833991 /* CCMainPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMainPage.h; sourceTree = "<group>"; };
 		7E6EFF7E174E214E00833991 /* CCMainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMainPage.m; sourceTree = "<group>"; };
-		7E6EFF80174E26CE00833991 /* me@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "me@2x.png"; sourceTree = "<group>"; };
+		7E6EFF80174E26CE00833991 /* Me@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Me@2x.png"; sourceTree = "<group>"; };
 		7E6EFF83174E27F400833991 /* CCTabBarTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCTabBarTest.m; sourceTree = "<group>"; };
 		7EA84838174DE461006FDB7B /* 42CCApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 42CCApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA8483B174DE461006FDB7B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -162,6 +169,8 @@
 				7E6EFF7B174E1A1700833991 /* CCMe.m */,
 				7E6EFF7D174E214E00833991 /* CCMainPage.h */,
 				7E6EFF7E174E214E00833991 /* CCMainPage.m */,
+				7E6B983B175650BB007DF00E /* CCAboutPage.h */,
+				7E6B983C175650BB007DF00E /* CCAboutPage.m */,
 				7E5209F21750C6E200BF6701 /* CCFBLogin.h */,
 				7E5209F31750C6E200BF6701 /* CCFBLogin.m */,
 				7E634B66175285F2003059A9 /* FBProfilePictureView+getImage.h */,
@@ -174,7 +183,9 @@
 		7EA84842174DE461006FDB7B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7E6EFF80174E26CE00833991 /* me@2x.png */,
+				7E6EFF80174E26CE00833991 /* Me@2x.png */,
+				7E6B984117565E37007DF00E /* Friends@2x.png */,
+				7E6B983917564DC9007DF00E /* About@2x.png */,
 				7E6EFF78174E10B800833991 /* 42base.sqlite */,
 				7EA84843174DE461006FDB7B /* 42CCApp-Info.plist */,
 				7EA84844174DE461006FDB7B /* InfoPlist.strings */,
@@ -286,7 +297,9 @@
 				7EA84850174DE461006FDB7B /* Default@2x.png in Resources */,
 				7EA84852174DE461006FDB7B /* Default-568h@2x.png in Resources */,
 				7E6EFF79174E10B800833991 /* 42base.sqlite in Resources */,
-				7E6EFF81174E26CE00833991 /* me@2x.png in Resources */,
+				7E6EFF81174E26CE00833991 /* Me@2x.png in Resources */,
+				7E6B983A17564DC9007DF00E /* About@2x.png in Resources */,
+				7E6B984217565E37007DF00E /* Friends@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +367,7 @@
 				7E6EFF7C174E1A1800833991 /* CCMe.m in Sources */,
 				7E6EFF7F174E214E00833991 /* CCMainPage.m in Sources */,
 				7E5209F41750C6E200BF6701 /* CCFBLogin.m in Sources */,
+				7E6B983D175650BB007DF00E /* CCAboutPage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
