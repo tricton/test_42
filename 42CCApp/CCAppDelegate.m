@@ -6,7 +6,7 @@
 
 @implementation CCAppDelegate
 
-@synthesize tabBarController, session, loginController, friendsPage, navigationController;
+@synthesize tabBarController, session, loginController, friendsPage;
 
 -(BOOL) application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -24,11 +24,13 @@
     mainPage = [[CCMainPage alloc] init];
     self.friendsPage = [[FBFriendPickerViewController alloc] init];
     self.friendsPage.delegate = self;
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:friendsPage];
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(70, 7, 180, 30)];
+
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(140, 0, 180, 30)];
+    searchBar.barStyle = UIBarStyleBlackTranslucent;
     searchBar.delegate = self;
     searchBar.tag = 80;
-    [self.navigationController.navigationBar addSubview:searchBar];
+    searchBar.showsCancelButton = YES;
+    [self.friendsPage.view addSubview:searchBar];
     CCAboutPage *aboutPage = [[CCAboutPage alloc] init];
     loginController = [[CCFBLogin alloc] init];
     
@@ -36,7 +38,7 @@
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.delegate = self;
-    [self.tabBarController setViewControllers: @[mainPage, navigationController, aboutPage]];
+    [self.tabBarController setViewControllers: @[mainPage, friendsPage, aboutPage]];
     
     NSArray *titles = @[@"Me", @"Friends", @"About"];
     for (int tab=0; tab<[self.tabBarController.viewControllers count]; tab++){
@@ -57,6 +59,33 @@
     return YES;
 }
 
+-(void) searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    searchText = searchBar.text;
+    [searchBar resignFirstResponder];
+    [self.friendsPage updateView];
+}
+
+-(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+}
+
+-(BOOL) friendPickerViewController:(FBFriendPickerViewController *)friendPicker
+                 shouldIncludeUser:(id<FBGraphUser>)user{
+    if (searchText && ![searchText isEqualToString:@"1"]){
+        NSRange result = [user.name rangeOfString:searchText
+                                          options:NSCaseInsensitiveSearch];
+        if (result.location != NSNotFound){
+            return YES;
+        }else{
+            return NO;
+        }
+    }else{
+        return YES;
+    }
+    return YES;
+}
+
 -(void) saveAbout{
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"about"]){
         [[NSUserDefaults standardUserDefaults] setObject:@"Напишите о себе"
@@ -66,7 +95,7 @@
 
 -(void) tabBarController:(UITabBarController *)tabBarController
  didSelectViewController:(UIViewController *)viewController{
-    if (viewController == navigationController){
+    if (viewController == friendsPage){
         [self.friendsPage loadData];
         if (![mainPage isIntenetConnectionAvailable]){
             [mainPage showAlertWithoutInternet];;

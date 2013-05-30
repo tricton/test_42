@@ -16,6 +16,7 @@
 @interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, FBFriendPickerDelegate, UISearchBarDelegate>{
     FBLoginView *loginView;
     CCMainPage *mainPage;
+    NSString *searchText;
 }
 
 @property (strong, nonatomic) UIWindow           *window;
@@ -23,7 +24,6 @@
 @property (nonatomic, strong) FBSession          *session;
 @property (nonatomic, strong) CCFBLogin          *loginController;
 @property (nonatomic, strong) FBFriendPickerViewController *friendsPage;
-@property (nonatomic, strong) UINavigationController *navigationController;
 
 -(void) openLoginApp;
 -(void) closeLoginApp;

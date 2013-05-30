@@ -14,7 +14,7 @@ SPEC_BEGIN(startApp)
 describe(@"Application should create a FMDB entity to work with database", ^{
     __block NSArray *controllers = [appDelegate tabBarController].viewControllers;
     __block CCMainPage *mainPage = (CCMainPage *)controllers[0];
-    __block UINavigationController *friendsPage = (UINavigationController *)controllers[1];
+    __block FBFriendPickerViewController *friendsPage = (FBFriendPickerViewController *)controllers[1];
     __block CCAboutPage *aboutPage = (CCAboutPage *)controllers[2];
     __block FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase:@"42base.sqlite"]];
     context(@"Entity of FMDB must read database from file", ^{
@@ -34,6 +34,8 @@ describe(@"Application should create a FMDB entity to work with database", ^{
                 [item.title shouldNotBeNil];
                 [item.image shouldNotBeNil];
             }
+            id delegate = friendsPage.delegate;
+            [delegate shouldNotBeNil];
         });
         it(@"On mainPage upon lazy load data from internet spinner must spin until data dowloading", ^{
             UIActivityIndicatorView *spinner = (UIActivityIndicatorView *)[mainPage.view viewWithTag:70];
