@@ -47,30 +47,16 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             NSMutableArray *results = [NSMutableArray array];
             FMResultSet *result = [db executeQuery:@"SELECT * FROM FBData"];
             if ([result next]){
-                NSString *name = [NSString stringWithFormat:@"%@ %@", [result stringForColumn:@"name"], [result stringForColumn:@"surName"]];
-                NSString *birthday = [result stringForColumn:@"birthday"];
-                NSString *bio = [result stringForColumn:@"biography"];
-                NSString *email = [result stringForColumn:@"contact"];
-                if (name){
-                    [results addObject:name];
-                }else{
-                    [results addObject:@""];
+                [results addObject:[NSString stringWithFormat:@"%@ %@", [result stringForColumn:@"name"], [result stringForColumn:@"surName"]]];
+                [results addObject:[result stringForColumn:@"birthday"]];
+                NSString *gender = [result stringForColumn:@"biography"];
+                if([gender isEqualToString:@"male"]){
+                    gender = @"Мужик";
+                }else if ([gender isEqualToString:@"female"]){
+                    gender = @"Женщина";
                 }
-                if (birthday){
-                    [results addObject:birthday];
-                }else{
-                    [results addObject:@""];
-                }
-                if (bio){
-                    [results addObject:bio];
-                }else{
-                    [results addObject:@""];
-                }
-                if (email){
-                    [results addObject:email];
-                }else{
-                    [results addObject:@""];
-                }
+                [results addObject:gender];
+                [results addObject:[result stringForColumn:@"contact"]];
             }
             for(int field=0; field<4; field++){
                 UITextView *infoField = (UITextView *)[mainPage.view viewWithTag:field+10];
