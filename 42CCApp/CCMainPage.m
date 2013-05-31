@@ -4,6 +4,7 @@
 #import "FMDatabase.h"
 #import "CCAppDelegate.h"
 #import "FBProfilePictureView+getImage.h"
+#import "FBLoginView+session.h"
 
 @interface CCMainPage (){
 
@@ -70,31 +71,29 @@
         [CCMe myData].contact = [result stringForColumn:@"contact"];
         [CCMe myData].myPhoto = [UIImage imageWithData:[result dataForColumn:@"photo"]];
     }
-    NSMutableArray *labelText = [NSMutableArray array];
     NSString *name = [NSString stringWithFormat:@"%@ %@", [CCMe myData].name, [CCMe myData].surName ];
-    if (name){
-        [labelText addObject:name];
-    }else{
-        [labelText addObject:@""];
+    if (!name){
+        name = @"";
     }
     NSString *birth = [CCMe myData].birthDay;
-    if (birth){
-        [labelText addObject:birth];
-    }else{
-        [labelText addObject:@""];
+    if (!birth){
+        birth = @"";
     }
-    NSString *bio = [CCMe myData].biography;
-    if (bio){
-        [labelText addObject:bio];
+    NSString *gender = [CCMe myData].biography;
+    if (!gender){
+        gender = @"";
     }else{
-        [labelText addObject:@""];
+        if([gender isEqualToString:@"male"]){
+            gender = @"Мужик";
+        }else{
+            gender = @"Женщина";
+        }
     }
     NSString *contact = [CCMe myData].contact;
-    if (contact){
-        [labelText addObject:contact];
-    }else{
-        [labelText addObject:@""];
+    if (!contact){
+        contact = @"";
     }
+    NSArray *labelText = @[name, birth, gender, contact];
     for (int labelTag=0; labelTag<4; labelTag++){
         UILabel *label = (UILabel *)[self.view viewWithTag:labelTag+10];
         label.text = labelText[labelTag];
@@ -104,7 +103,6 @@
 }
 
 -(void) loadDataFromMyPage{
-    NSString *key = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
     NSFileManager *fManager = [NSFileManager defaultManager];
     NSString *workingPath = [self getPathToDatabase:@"42base.sqlite"];
     [fManager fileExistsAtPath:workingPath];
@@ -112,10 +110,22 @@
     [fManager copyItemAtPath:fileFromBundle
                       toPath:workingPath
                        error:nil];
-    FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase:@"42base.sqlite"]];
-    [db open];
-    if ([key isEqualToString:@"LoadNewData"]){
-        if (FBSession.activeSession.isOpen) {
+    [self putDataToFields];
+    NSDictionary *localToken;
+    if ([self isIntenetConnectionAvailable]){
+        FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
+        localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
+        [localToken writeToFile:[self getPathToDatabase:@"token"]
+                     atomically:YES];
+    }else{
+        [self showAlertWithoutInternet];
+    }
+    __block NSString *token = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
+    if ([CCMe myData].myPhoto){
+        return;
+    }else{
+        FBLoginView *loginView = (FBLoginView *)[[appDelegate loginController].view viewWithTag:30];
+        if ([loginView session].isOpen) {
             if ([self isIntenetConnectionAvailable]){
                 __block UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
                 spinner.tag = 70;
@@ -123,39 +133,59 @@
                 spinner.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
                 [self.view addSubview:spinner];
                 [spinner startAnimating];
-                FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
-                NSDictionary *localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
-                [localToken writeToFile:[self getPathToDatabase:@"token"]
-                             atomically:YES];
-                __block NSString *token = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
-                [[FBRequest requestForMe] startWithCompletionHandler:
+                                [[FBRequest requestForMe] startWithCompletionHandler:
                  ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
                      if (!error) {
-                         [db executeUpdate:@"DELETE FROM FBData"];
-                         NSString *pictureLinkHeader = @"https://graph.facebook.com/me/?access_token=";
-                         NSString *pictureLinklEnd = @"&fields=picture";
-                         NSString *finalLink = [NSString stringWithFormat:@"%@%@%@", pictureLinkHeader, token, pictureLinklEnd];
-                         NSData *myData = [NSData dataWithContentsOfURL:[NSURL URLWithString:finalLink]];
-                         NSDictionary *dictResult = [NSJSONSerialization JSONObjectWithData:myData
-                                                                                    options:kNilOptions
-                                                                                      error:nil];;
-                         NSString *pictureUrl = [[[dictResult objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
-                         NSData *pic = [NSData dataWithContentsOfURL:[NSURL URLWithString:pictureUrl]];
-                         [db executeUpdate:@"insert into FBData (name, surName, biography, contact, birthday, photo) values (?,?,?,?,?,?)", [user objectForKey:@"first_name"], [user objectForKey:@"last_name"], [user objectForKey:@"bio"], [user objectForKey:@"email"], [user objectForKey:@"birthday"], pic];
-                         [[NSNotificationCenter defaultCenter] postNotificationName:@"Download done"
-                                                                             object:nil];
+                         [self updateDBwithUserData:user
+                                       andUserToken:token];
                          [spinner stopAnimating];
                      }
                  }];
-                
-                
             }else{
                 [self showAlertWithoutInternet];
             }
         }
-    }else if ([key isEqualToString:@"UseOldData"]){
-        [self putDataToFields];
     }
+}
+
+-(void) updateDBwithUserData:(NSDictionary<FBGraphUser> *) user
+                andUserToken:(NSString *) token{
+    NSString *pictureLinkHeader = @"https://graph.facebook.com/me/?access_token=";
+    NSString *pictureLinklEnd = @"&fields=picture";
+    NSString *finalLink = [NSString stringWithFormat:@"%@%@%@", pictureLinkHeader, token, pictureLinklEnd];
+    NSData *myData = [NSData dataWithContentsOfURL:[NSURL URLWithString:finalLink]];
+    NSDictionary *dictResult = [NSJSONSerialization JSONObjectWithData:myData
+                                                               options:kNilOptions
+                                                                 error:nil];;
+    NSString *pictureUrl = [[[dictResult objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+    NSData *pic = [NSData dataWithContentsOfURL:[NSURL URLWithString:pictureUrl]];
+    NSString *name = [user objectForKey:@"first_name"];
+    if (!name){
+        name = @"";
+    }
+    NSString *surName = [user objectForKey:@"last_name"];
+    if (!surName){
+        surName = @"";
+    }
+    NSString *birth = [user objectForKey:@"birthday"];
+    if (!birth){
+        birth = @"";
+    }
+    NSString *gender = [user objectForKey:@"gender"];
+    if (!gender){
+        gender = @"";
+    }
+    NSString *contact = [[user objectForKey:@"hometown"] objectForKey:@"name"];
+    if (!contact){
+        contact = @"";
+    }
+    FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase:@"42base.sqlite"]];
+    [db open];
+    [db executeUpdate:@"DELETE FROM FBData"];
+    [db executeUpdate:@"insert into FBData (name, surName, biography, contact, birthday, photo) values (?,?,?,?,?,?)", name, surName, gender, contact, birth, pic];
+//    BOOL su = [db executeUpdate:@"UPDATE FBData SET name=?, surName=?, birthday=?, biography=?, contact=?, photo=?", name, surName, birth,  gender, contact, pic];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Download done"
+                                                        object:nil];
 }
 
 -(void) showAlertWithoutInternet{

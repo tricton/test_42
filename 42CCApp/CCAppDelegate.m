@@ -21,8 +21,6 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//    [self loadDataFromBase];
-    
     CCMainPage *mainPage = [[CCMainPage alloc] init];
     loginController = [[CCFBLogin alloc] init];
     
@@ -56,19 +54,19 @@
 }
 
 -(void) openLoginApp{
-    NSString *isFirstLaunch = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
-    if ([isFirstLaunch isEqualToString:@"LoadNewData"]){
+//    NSString *isFirstLaunch = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
+//    if ([isFirstLaunch isEqualToString:@"LoadNewData"]){
+//        [self.window setRootViewController:tabBarController];
+//        [[NSUserDefaults standardUserDefaults] setObject:@"UseOldData"
+//                                                  forKey:@"FirstLogInKey"];
+//    }else if ([isFirstLaunch isEqualToString:@"UseOldData"]){
         [self.window setRootViewController:tabBarController];
-        [[NSUserDefaults standardUserDefaults] setObject:@"UseOldData"
-                                                  forKey:@"FirstLogInKey"];
-    }else if ([isFirstLaunch isEqualToString:@"UseOldData"]){
-        [self.window setRootViewController:tabBarController];
-    }
+//    }
 }
 
 -(void) closeLoginApp{
-    [[NSUserDefaults standardUserDefaults] setObject:@"LoadNewData"
-                                              forKey:@"FirstLogInKey"];
+//    [[NSUserDefaults standardUserDefaults] setObject:@"LoadNewData"
+//                                              forKey:@"FirstLogInKey"];
     [[loginView session] closeAndClearTokenInformation];
     [self.window setRootViewController:loginController];
 }
