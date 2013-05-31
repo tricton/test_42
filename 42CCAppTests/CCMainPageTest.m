@@ -49,7 +49,13 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             if ([result next]){
                 [results addObject:[NSString stringWithFormat:@"%@ %@", [result stringForColumn:@"name"], [result stringForColumn:@"surName"]]];
                 [results addObject:[result stringForColumn:@"birthday"]];
-                [results addObject:[result stringForColumn:@"biography"]];
+                NSString *gender = [result stringForColumn:@"biography"];
+                if([gender isEqualToString:@"male"]){
+                    gender = @"Мужик";
+                }else if ([gender isEqualToString:@"female"]){
+                    gender = @"Женщина";
+                }
+                [results addObject:gender];
                 [results addObject:[result stringForColumn:@"contact"]];
             }
             for(int field=0; field<4; field++){
@@ -59,6 +65,7 @@ describe(@"Application should create a FMDB entity to work with database", ^{
                 [[text should] equal:results[field]];
             }
         });
+
         it(@"On third tab should be UITextView", ^{
             UITextView *aboutField = (UITextView *)[aboutPage.view viewWithTag:50];
             [aboutField shouldNotBeNil];

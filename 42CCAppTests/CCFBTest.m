@@ -34,26 +34,40 @@ describe(@"After application start controller CCFBLogin must be active", ^{
             } 
         });
         context(@"Data from FB profile should stored in database", ^{
-            it(@"Propertys in CCMe should conform to appropropriate propertys in FBGraphUser. If session is open then load data from web, check it from key in NSUserDefaults", ^{
-                __block NSString *key = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
+            it(@"Propertys in CCMe should conform to appropropriate propertys in FBGraphUser.", ^{
                 __block NSDictionary *userInfo;
                 if ([FBSession activeSession].isOpen) {
+                    [mainPage loadDataFromMyPage];
                     [[FBRequest requestForMe] startWithCompletionHandler:
                      ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
                          if (!error) {
                              userInfo = user;
+                             FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase:@"42base.sqlite"]];
+                             [db open];
+                             NSArray *results = [NSMutableArray array];
+                             FMResultSet *result = [db executeQuery:@"SELECT * FROM FBData"];
+                             if ([result next]){
+                                 NSString *name = [NSString stringWithFormat:@"%@ %@", [result stringForColumn:@"name"], [result stringForColumn:@"surName"]];
+                                 NSString *birthday = [result stringForColumn:@"birthday"];
+                                 NSString *gender = [result stringForColumn:@"biography"];
+                                 NSString *contact = [result stringForColumn:@"contact"];
+                                 results = @[name, birthday, gender, contact];
+                             }
+                             for(int field=0; field<4; field++){
+                                 UITextView *infoField = (UITextView *)[mainPage.view viewWithTag:field+10];
+                                 [[theValue(infoField.editable) should] equal:theValue(YES)];
+                                 NSString *text = infoField.text;
+                                 [[text should] equal:results[field]];
+                             }
                          }
                      }];
-                    [[key should] equal:@"UseOldData"];
-                }else{
-                    [[key should] equal:@"LoadNewData"];
                 }
                 [[expectFutureValue(userInfo) shouldEventuallyBeforeTimingOutAfter(3.0)] shouldNotBeNil];
             });
         });
         it(@"We should have internet to work with app", ^{
-            [[theValue([mainPage isIntenetConnectionAvailable]) should] equal:theValue(YES)];
-            
+            if ([mainPage isIntenetConnectionAvailable])
+                [[theValue([mainPage isIntenetConnectionAvailable]) should] equal:theValue(YES)];
         });
     });
 });

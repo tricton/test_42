@@ -1,7 +1,6 @@
 #import "CCAppDelegate.h"
 #import "CCMe.h"
 #import "CCAboutPage.h"
-//#import <FacebookSDK/FBSessionTokenCachingStrategy.h>
 #import "FBLoginView+session.h"
 
 @implementation CCAppDelegate
