@@ -39,7 +39,6 @@
          replacementText:(NSString *)text{
     if ([text isEqualToString:@"\n"]){
         [textView resignFirstResponder];
-//        [self saveAboutData:textView.text];
     }
     return YES;
 }
@@ -56,7 +55,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
 @end

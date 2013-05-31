@@ -22,16 +22,18 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-//    [self loadDataFromBase];
-    
     CCMainPage *mainPage = [[CCMainPage alloc] init];
     CCAboutPage *aboutPage = [[CCAboutPage alloc] init];
     loginController = [[CCFBLogin alloc] init];
+    
+    [self saveAbout];
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.delegate = self;
     [self.tabBarController setViewControllers: @[mainPage, aboutPage]];
     
+    NSArray *tab = self.tabBarController.viewControllers;
+    NSLog(@"%i",[tab count]);
     NSArray *titles = @[@"Me", @"About"];
     for (int tab=0; tab<[self.tabBarController.viewControllers count]; tab++){
         UITabBarItem *mainTab = self.tabBarController.tabBar.items[tab];
@@ -49,6 +51,13 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(void) saveAbout{
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"about"]){
+        [[NSUserDefaults standardUserDefaults] setObject:@"Напишите о себе"
+                                                  forKey:@"about"];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application{

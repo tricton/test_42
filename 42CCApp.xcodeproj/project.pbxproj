@@ -34,6 +34,7 @@
 		7EA8485C174DE461006FDB7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA8483D174DE461006FDB7B /* Foundation.framework */; };
 		7EA84864174DE461006FDB7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EA84862174DE461006FDB7B /* InfoPlist.strings */; };
 		7EA84872174DE535006FDB7B /* CCMainPageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA84871174DE535006FDB7B /* CCMainPageTest.m */; };
+		7EEF755417582E68003039BE /* CCAboutPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEF755317582E68003039BE /* CCAboutPage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		7EA84861174DE461006FDB7B /* 42CCAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "42CCAppTests-Info.plist"; sourceTree = "<group>"; };
 		7EA84863174DE461006FDB7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EA84871174DE535006FDB7B /* CCMainPageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMainPageTest.m; sourceTree = "<group>"; };
+		7EEF755217582E68003039BE /* CCAboutPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAboutPage.h; sourceTree = "<group>"; };
+		7EEF755317582E68003039BE /* CCAboutPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAboutPage.m; sourceTree = "<group>"; };
 		E6CC1F3801A5482084592D44 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -162,6 +165,8 @@
 				7E6EFF7B174E1A1700833991 /* CCMe.m */,
 				7E6EFF7D174E214E00833991 /* CCMainPage.h */,
 				7E6EFF7E174E214E00833991 /* CCMainPage.m */,
+				7EEF755217582E68003039BE /* CCAboutPage.h */,
+				7EEF755317582E68003039BE /* CCAboutPage.m */,
 				7E5209F21750C6E200BF6701 /* CCFBLogin.h */,
 				7E5209F31750C6E200BF6701 /* CCFBLogin.m */,
 				7E634B66175285F2003059A9 /* FBProfilePictureView+getImage.h */,
@@ -354,6 +359,7 @@
 				7E6EFF7C174E1A1800833991 /* CCMe.m in Sources */,
 				7E6EFF7F174E214E00833991 /* CCMainPage.m in Sources */,
 				7E5209F41750C6E200BF6701 /* CCFBLogin.m in Sources */,
+				7EEF755417582E68003039BE /* CCAboutPage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

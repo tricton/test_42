@@ -11,8 +11,9 @@
 SPEC_BEGIN(startApp)
 
 describe(@"Application should create a FMDB entity to work with database", ^{
-    __block CCMainPage *mainPage = (CCMainPage *) [appDelegate tabBarController].viewControllers[0];
-    __block CCAboutPage *aboutPage = (CCAboutPage *)[appDelegate tabBarController].viewControllers[1];
+    NSArray *tab = [appDelegate tabBarController].viewControllers;
+    __block CCMainPage *mainPage = (CCMainPage *)tab[0];
+    __block CCAboutPage *aboutPage = (CCAboutPage *)tab[1];
     __block FMDatabase *db = [FMDatabase databaseWithPath:[mainPage getPathToDatabase:@"42base.sqlite"]];
     context(@"Entity of FMDB must read database from file", ^{
         [db open];
@@ -39,7 +40,13 @@ describe(@"Application should create a FMDB entity to work with database", ^{
             if ([result next]){
                 [results addObject:[NSString stringWithFormat:@"%@ %@", [result stringForColumn:@"name"], [result stringForColumn:@"surName"]]];
                 [results addObject:[result stringForColumn:@"birthday"]];
-                [results addObject:[result stringForColumn:@"biography"]];
+                NSString *gender = [result stringForColumn:@"biography"];
+                if([gender isEqualToString:@"male"]){
+                    gender = @"Мужик";
+                }else if ([gender isEqualToString:@"female"]){
+                    gender = @"Женщина";
+                }
+                [results addObject:gender];
                 [results addObject:[result stringForColumn:@"contact"]];
             }
             for(int field=0; field<4; field++){
