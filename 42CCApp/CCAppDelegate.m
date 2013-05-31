@@ -54,10 +54,19 @@
 }
 
 -(void) openLoginApp{
+    NSString *isFirstLaunch = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
+    if ([isFirstLaunch isEqualToString:@"LoadNewData"]){
         [self.window setRootViewController:tabBarController];
+        [[NSUserDefaults standardUserDefaults] setObject:@"UseOldData"
+                                                  forKey:@"FirstLogInKey"];
+    }else if ([isFirstLaunch isEqualToString:@"UseOldData"]){
+        [self.window setRootViewController:tabBarController];
+    }
 }
 
 -(void) closeLoginApp{
+    [[NSUserDefaults standardUserDefaults] setObject:@"LoadNewData"
+                                              forKey:@"FirstLogInKey"];
     [[loginView session] closeAndClearTokenInformation];
     [self.window setRootViewController:loginController];
 }

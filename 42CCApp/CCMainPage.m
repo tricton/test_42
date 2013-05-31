@@ -85,7 +85,7 @@
     }else{
         if([gender isEqualToString:@"male"]){
             gender = @"Мужик";
-        }else{
+        }else if ([gender isEqualToString:@"female"]){
             gender = @"Женщина";
         }
     }
@@ -121,7 +121,8 @@
         [self showAlertWithoutInternet];
     }
     __block NSString *token = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
-    if ([CCMe myData].myPhoto){
+    NSString *isFirstLaunch = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
+    if ([CCMe myData].myPhoto && [isFirstLaunch isEqualToString:@"UseOldData"]){
         return;
     }else{
         FBLoginView *loginView = (FBLoginView *)[[appDelegate loginController].view viewWithTag:30];

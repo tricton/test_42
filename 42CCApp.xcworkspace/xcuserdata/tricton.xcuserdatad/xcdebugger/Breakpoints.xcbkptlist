@@ -60,22 +60,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCAppDelegate.m"
-         timestampString = "391649555.25266"
+         timestampString = "391658233.799692"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "125"
-         endingLineNumber = "125">
+         startingLineNumber = "143"
+         endingLineNumber = "143">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCAppDelegate.m"
-         timestampString = "391649555.25266"
+         timestampString = "391658233.799692"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "113"
-         endingLineNumber = "113">
+         startingLineNumber = "131"
+         endingLineNumber = "131">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -95,35 +95,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCAppDelegate.m"
-         timestampString = "391649555.25266"
+         timestampString = "391657602.813119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "22"
-         endingLineNumber = "22"
+         startingLineNumber = "33"
+         endingLineNumber = "33"
          landmarkName = "-application:didFinishLaunchingWithOptions:"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "42CCAppTests/CCTabBarTest.m"
-         timestampString = "391426567.657"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "13"
-         endingLineNumber = "13">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "42CCAppTests/CCTabBarTest.m"
-         timestampString = "391426572.07752"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "25"
-         endingLineNumber = "25">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -140,71 +118,45 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "42CCApp/CCAppDelegate.m"
-         timestampString = "391649555.25266"
+         filePath = "42CCAppTests/CCFBTest.m"
+         timestampString = "391655304.638221"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "50"
-         endingLineNumber = "50"
-         landmarkName = "-applicationDidEnterBackground:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "42CCApp/CCAppDelegate.m"
-         timestampString = "391649555.25266"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
-         landmarkName = "@implementation CCAppDelegate"
-         landmarkType = "3">
+         startingLineNumber = "38"
+         endingLineNumber = "38">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCAppTests/CCFBTest.m"
-         timestampString = "391649152.672981"
+         timestampString = "391655027.220851"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "37"
-         endingLineNumber = "37">
+         startingLineNumber = "76"
+         endingLineNumber = "76">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCAppTests/CCFBTest.m"
-         timestampString = "391649152.672981"
+         timestampString = "391655027.220851"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "63"
-         endingLineNumber = "63">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "42CCAppTests/CCFBTest.m"
-         timestampString = "391649152.672981"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71">
+         startingLineNumber = "84"
+         endingLineNumber = "84">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391653397.174256"
+         timestampString = "391655027.220851"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
          landmarkName = "-isIntenetConnectionAvailable"
          landmarkType = "5">
       </FileBreakpoint>
@@ -213,11 +165,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391653397.174256"
+         timestampString = "391655027.220851"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "25"
-         endingLineNumber = "25"
+         startingLineNumber = "26"
+         endingLineNumber = "26"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -226,33 +178,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391653771.236948"
+         timestampString = "391658233.799692"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "291"
-         endingLineNumber = "291">
+         startingLineNumber = "337"
+         endingLineNumber = "337">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCAppTests/CCMainPageTest.m"
-         timestampString = "391571769.430378"
+         timestampString = "391657798.83423"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "75"
-         endingLineNumber = "75">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "42CCAppTests/CCMainPageTest.m"
-         timestampString = "391571769.430378"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47">
+         startingLineNumber = "82"
+         endingLineNumber = "82">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -285,11 +226,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCAboutPage.m"
-         timestampString = "391562508.860805"
+         timestampString = "391656267.259075"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "46"
-         endingLineNumber = "46"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
          landmarkName = "-saveAboutData:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -298,11 +239,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCAboutPage.m"
-         timestampString = "391562508.860805"
+         timestampString = "391656267.259075"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "51"
-         endingLineNumber = "51"
+         startingLineNumber = "50"
+         endingLineNumber = "50"
          landmarkName = "-textViewShouldEndEditing:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -714,59 +655,101 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCAppTests/CCMainPageTest.m"
-         timestampString = "391571769.430378"
+         timestampString = "391657798.83423"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86">
+         startingLineNumber = "93"
+         endingLineNumber = "93">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "42CCApp/CCAppDelegate.m"
-         timestampString = "391649555.25266"
+         filePath = "42CCApp/CCMainPage.m"
+         timestampString = "391658233.799692"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "67"
-         endingLineNumber = "67"
-         landmarkName = "-closeLoginApp"
+         startingLineNumber = "313"
+         endingLineNumber = "313">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "42CCApp/CCMainPage.m"
+         timestampString = "391658233.799692"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "323"
+         endingLineNumber = "323">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "42CCApp/CCMainPage.m"
+         timestampString = "391655027.220851"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
+         landmarkName = "-putDataToFields"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391653771.236948"
+         filePath = "42CCAppTests/CCTabBarTest.m"
+         timestampString = "391655623.415346"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "267"
-         endingLineNumber = "267"
-         landmarkName = "-saveDataFromFB"
-         landmarkType = "5">
+         startingLineNumber = "104"
+         endingLineNumber = "104">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "42CCAppTests/CCTabBarTest.m"
+         timestampString = "391655623.415346"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "109"
+         endingLineNumber = "109">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "42CCAppTests/CCTabBarTest.m"
+         timestampString = "391655623.415346"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "117"
+         endingLineNumber = "117">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "42CCAppTests/CCMainPageTest.m"
+         timestampString = "391656058.34258"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "14"
+         endingLineNumber = "14">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391653771.236948"
+         timestampString = "391656979.849325"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "277"
-         endingLineNumber = "277">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391651635.852512"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "106"
-         endingLineNumber = "106"
+         startingLineNumber = "107"
+         endingLineNumber = "107"
          landmarkName = "-loadDataFromMyPage"
          landmarkType = "5">
       </FileBreakpoint>
@@ -775,24 +758,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391653397.174256"
+         timestampString = "391658233.799692"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "62"
-         endingLineNumber = "62"
-         landmarkName = "-putDataToFields"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391653771.236948"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "151"
-         endingLineNumber = "151"
+         startingLineNumber = "155"
+         endingLineNumber = "155"
          landmarkName = "-updateDBwithUserData:andUserToken:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -801,13 +771,35 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "42CCApp/CCMainPage.m"
-         timestampString = "391653771.236948"
+         timestampString = "391657038.63331"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "127"
-         endingLineNumber = "127"
-         landmarkName = "-loadDataFromMyPage"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
+         landmarkName = "-viewWillAppear:"
          landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "42CCAppTests/CCMainPageTest.m"
+         timestampString = "391657798.83423"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "60"
+         endingLineNumber = "60">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "42CCAppTests/CCMainPageTest.m"
+         timestampString = "391657798.83423"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "53"
+         endingLineNumber = "53">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
