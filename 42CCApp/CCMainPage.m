@@ -183,7 +183,6 @@
     [db open];
     [db executeUpdate:@"DELETE FROM FBData"];
     [db executeUpdate:@"insert into FBData (name, surName, biography, contact, birthday, photo) values (?,?,?,?,?,?)", name, surName, gender, contact, birth, pic];
-//    BOOL su = [db executeUpdate:@"UPDATE FBData SET name=?, surName=?, birthday=?, biography=?, contact=?, photo=?", name, surName, birth,  gender, contact, pic];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Download done"
                                                         object:nil];
 }
