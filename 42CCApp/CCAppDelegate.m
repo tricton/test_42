@@ -11,7 +11,8 @@
 -(BOOL) application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation{
+         annotation:(id)annotation
+{
     return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication
                         withSession:self.session];
@@ -44,16 +45,8 @@
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application{
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application{
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application{
-}
-
--(void) openLoginApp{
+-(void) openLoginApp
+{
     NSString *isFirstLaunch = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
     if ([isFirstLaunch isEqualToString:@"LoadNewData"]){
         [self.window setRootViewController:tabBarController];
@@ -64,18 +57,28 @@
     }
 }
 
--(void) closeLoginApp{
+-(void) closeLoginApp
+{
     [[NSUserDefaults standardUserDefaults] setObject:@"LoadNewData"
                                               forKey:@"FirstLogInKey"];
     [[loginView session] closeAndClearTokenInformation];
     [self.window setRootViewController:loginController];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application{
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
     [FBAppCall handleDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application{
 }
 
+- (void)applicationWillResignActive:(UIApplication *)application{
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application{
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application{
+}
 @end

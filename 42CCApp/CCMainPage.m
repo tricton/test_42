@@ -207,12 +207,13 @@
     [self changeViewFrames:toInterfaceOrientation];
 }
 
--(void) changeViewFrames:(UIInterfaceOrientation) orientation{
+-(void) changeViewFrames:(UIInterfaceOrientation) orientation
+{
     UIImageView *myPhoto = (UIImageView *)[self.view viewWithTag:20];
     UIButton *logOutButton = (UIButton *)[self.view viewWithTag:40];
     if (UIInterfaceOrientationIsPortrait(orientation)){
         myPhoto.frame = CGRectMake(96, 20, 128, 128);
-        logOutButton.frame = CGRectMake(0, 0, 80, 40);
+        logOutButton.frame = CGRectMake(0, 0, 80, 20);
         for (int label=0; label<4; label++){
             UILabel *infoLabel = (UILabel *)[self.view viewWithTag:label+10];
             if (label<2){
@@ -225,7 +226,7 @@
         }
     }else{        
         myPhoto.frame = CGRectMake(20, 20, 128, 128);
-        logOutButton.frame = CGRectMake(0, 150, 80, 40);
+        logOutButton.frame = CGRectMake(0, 0, 80, 20);
         for (int label=0; label<4; label++){
             UILabel *infoLabel = (UILabel *)[self.view viewWithTag:label+10];
             if (label < 2){
@@ -239,7 +240,8 @@
     }
 }
 
--(float) sizeOfFont:(UILabel *) label{
+-(float) sizeOfFont:(UILabel *) label
+{
     float fontSize = label.font.pointSize;
     while ([self dicrementFont:label]) {
         fontSize--;
@@ -248,7 +250,8 @@
     return fontSize;
 }
 
--(BOOL) dicrementFont:(UILabel *) label{
+-(BOOL) dicrementFont:(UILabel *) label
+{
     float fontSize = label.font.pointSize;
     CGSize needSize = [label.text sizeWithFont:[UIFont systemFontOfSize:fontSize]
                              constrainedToSize:CGSizeMake(label.frame.size.width, 10000)
