@@ -151,7 +151,8 @@
 }
 
 -(void) updateDBwithUserData:(NSDictionary<FBGraphUser> *) user
-                andUserToken:(NSString *) token{
+                andUserToken:(NSString *) token
+{
     NSString *pictureLinkHeader = @"https://graph.facebook.com/me/?access_token=";
     NSString *pictureLinklEnd = @"&fields=picture";
     NSString *finalLink = [NSString stringWithFormat:@"%@%@%@", pictureLinkHeader, token, pictureLinklEnd];
@@ -189,7 +190,8 @@
                                                         object:nil];
 }
 
--(void) showAlertWithoutInternet{
+-(void) showAlertWithoutInternet
+{
     [[[UIAlertView alloc] initWithTitle:@"No internet"
                                 message:@"Find Wifi or Cellular internet"
                                delegate:self
@@ -197,23 +199,26 @@
                       otherButtonTitles:nil] show];
 }
 
--(NSString *) getPathToDatabase:(NSString *) string{
+-(NSString *) getPathToDatabase:(NSString *) string
+{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = paths[0];
     return [path stringByAppendingPathComponent:string];
 }
 
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                         duration:(NSTimeInterval)duration{
+                                         duration:(NSTimeInterval)duration
+{
     [self changeViewFrames:toInterfaceOrientation];
 }
 
--(void) changeViewFrames:(UIInterfaceOrientation) orientation{
+-(void) changeViewFrames:(UIInterfaceOrientation) orientation
+{
     UIImageView *myPhoto = (UIImageView *)[self.view viewWithTag:20];
     UIButton *logOutButton = (UIButton *)[self.view viewWithTag:40];
     if (UIInterfaceOrientationIsPortrait(orientation)){
         myPhoto.frame = CGRectMake(96, 20, 128, 128);
-        logOutButton.frame = CGRectMake(0, 0, 80, 40);
+        logOutButton.frame = CGRectMake(0, 0, 80, 20);
         for (int label=0; label<4; label++){
             UITextView *infoLabel = (UITextView *)[self.view viewWithTag:label+10];
             if (label<2){
@@ -226,7 +231,7 @@
         }
     }else{        
         myPhoto.frame = CGRectMake(20, 20, 128, 128);
-        logOutButton.frame = CGRectMake(0, 150, 80, 40);
+        logOutButton.frame = CGRectMake(0, 0, 80, 20);
         for (int label=0; label<4; label++){
             UITextView *infoLabel = (UITextView *)[self.view viewWithTag:label+10];
             if (label < 2){
@@ -240,7 +245,8 @@
     }
 }
 
--(float) sizeOfFont:(UITextView *) label{
+-(float) sizeOfFont:(UITextView *) label
+{
     float fontSize = label.font.pointSize;
     while ([self dicrementFont:label]) {
         fontSize--;
@@ -249,7 +255,8 @@
     return fontSize;
 }
 
--(BOOL) dicrementFont:(UITextView *) label{
+-(BOOL) dicrementFont:(UITextView *) label
+{
     float fontSize = label.font.pointSize;
     CGSize needSize = [label.text sizeWithFont:[UIFont systemFontOfSize:fontSize]
                              constrainedToSize:CGSizeMake(label.frame.size.width, 10000)
@@ -265,7 +272,8 @@
 
 -(BOOL)         textView:(UITextView *)textView
  shouldChangeTextInRange:(NSRange)range
-         replacementText:(NSString *)text{
+         replacementText:(NSString *)text
+{
     if ([text isEqualToString:@"\n"]){
         [textView resignFirstResponder];
         [self saveDataFromFB];
@@ -273,7 +281,8 @@
     return YES;
 }
 
--(void) saveDataFromFB{
+-(void) saveDataFromFB
+{
     NSMutableArray *texts = [NSMutableArray array];
     for (int label=0; label<4; label++){
         UITextView *infoLabel = (UITextView *)[self.view viewWithTag:label+10];
