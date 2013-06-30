@@ -14,6 +14,8 @@
 
 @implementation CCMainPage
 
+@synthesize isFirstLaunch;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -42,24 +44,50 @@
     [self.view addSubview:myPhoto];    
     UIInterfaceOrientation orientation = [UIApplication sharedApplication]. statusBarOrientation;
     [self changeViewFrames:orientation];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(putDataToFields)
-                                                 name:@"Download done"
-                                               object:nil];
+//    [self checkUserChange];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(putDataToFields)
+//                                                 name:@"Download done"
+//                                               object:nil];
 }
 
--(void) viewWillAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated
+{
+    [self checkUserChange];
     [self loadDataFromMyPage];
 }
 
+//Проверка сменился ли  токен пользователя
+-(void) checkUserChange
+{
+    NSString *tokenFileName = [self getPathToDatabase:@"token"];
+    NSDictionary *localToken = [NSDictionary dictionaryWithContentsOfFile:tokenFileName];
+    __block NSString *tokenAsIt = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
+    isFirstLaunch = NO;
+    if ([self isIntenetConnectionAvailable]){
+        FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
+        localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
+        NSString *tokenCompareString = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
+        if (![tokenAsIt isEqualToString:tokenCompareString]){
+            isFirstLaunch = YES;
+        }
+        [localToken writeToFile:tokenFileName
+                     atomically:YES];
+    }else{
+        [self showAlertWithoutInternet];
+    }
+}
+
+//Проверка доступности интернета
 -(BOOL) isIntenetConnectionAvailable{
     reachability = [Reachability reachabilityForInternetConnection];
     BOOL is = !reachability.isConnectionRequired;
     return is;
 }
 
-
--(void) putDataToFields{
+//Загрузка данных из БД в программу
+-(void) putDataToFields
+{
     FMDatabase *db = [FMDatabase databaseWithPath:[self getPathToDatabase:@"42base.sqlite"]];
     [db open];
     FMResultSet *result = [db executeQuery:@"SELECT * FROM FBData"];
@@ -103,7 +131,9 @@
     myPhoto.image = [CCMe myData].myPhoto;
 }
 
--(void) loadDataFromMyPage{
+//Загрузка данных из странички ФБ
+-(void) loadDataFromMyPage
+{
     NSFileManager *fManager = [NSFileManager defaultManager];
     NSString *workingPath = [self getPathToDatabase:@"42base.sqlite"];
     [fManager fileExistsAtPath:workingPath];
@@ -111,20 +141,8 @@
     [fManager copyItemAtPath:fileFromBundle
                       toPath:workingPath
                        error:nil];
-    [self putDataToFields];
-    NSDictionary *localToken;
-    if ([self isIntenetConnectionAvailable]){
-        FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
-        localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
-        [localToken writeToFile:[self getPathToDatabase:@"token"]
-                     atomically:YES];
-    }else{
-        [self showAlertWithoutInternet];
-    }
-    __block NSString *token = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
-    NSString *isFirstLaunch = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
-    if ([CCMe myData].myPhoto && [isFirstLaunch isEqualToString:@"UseOldData"]){
-        return;
+    if (!isFirstLaunch){
+        [self putDataToFields];
     }else{
         FBLoginView *loginView = (FBLoginView *)[[appDelegate loginController].view viewWithTag:30];
         if ([loginView session].isOpen) {
@@ -138,8 +156,10 @@
                 [[FBRequest requestForMe] startWithCompletionHandler:
                  ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
                      if (!error) {
+                         NSDictionary *localToken = [NSDictionary dictionaryWithContentsOfFile:[self getPathToDatabase:@"token"]];
+                         NSString *tokenAsIt = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
                          [self updateDBwithUserData:user
-                                       andUserToken:token];
+                                       andUserToken:tokenAsIt];
                          [spinner stopAnimating];
                      }
                  }];
@@ -150,6 +170,7 @@
     }
 }
 
+//загрузка данных в БД из ФБ
 -(void) updateDBwithUserData:(NSDictionary<FBGraphUser> *) user
                 andUserToken:(NSString *) token
 {
@@ -186,10 +207,10 @@
     [db open];
     [db executeUpdate:@"DELETE FROM FBData"];
     [db executeUpdate:@"insert into FBData (name, surName, biography, contact, birthday, photo) values (?,?,?,?,?,?)", name, surName, gender, contact, birth, pic];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Download done"
-                                                        object:nil];
+    [self putDataToFields];
 }
 
+//нет инета - показываем алерт
 -(void) showAlertWithoutInternet
 {
     [[[UIAlertView alloc] initWithTitle:@"No internet"
@@ -199,6 +220,7 @@
                       otherButtonTitles:nil] show];
 }
 
+//Генерируем строку для сохранения данных
 -(NSString *) getPathToDatabase:(NSString *) string
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -206,12 +228,14 @@
     return [path stringByAppendingPathComponent:string];
 }
 
+//отработка поворота экрана
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                          duration:(NSTimeInterval)duration
 {
     [self changeViewFrames:toInterfaceOrientation];
 }
 
+//Изменение фреймов вьюх на экране
 -(void) changeViewFrames:(UIInterfaceOrientation) orientation
 {
     UIImageView *myPhoto = (UIImageView *)[self.view viewWithTag:20];
@@ -245,6 +269,7 @@
     }
 }
 
+//уменьшаем шрифт до нужного размера, чтобы всё вслезло в поле
 -(float) sizeOfFont:(UITextView *) label
 {
     float fontSize = label.font.pointSize;
@@ -255,6 +280,7 @@
     return fontSize;
 }
 
+//проверка - влезает ли шрифт
 -(BOOL) dicrementFont:(UITextView *) label
 {
     float fontSize = label.font.pointSize;
@@ -270,6 +296,7 @@
     }
 }
 
+//мониторинг нажатия кнопки Ентер
 -(BOOL)         textView:(UITextView *)textView
  shouldChangeTextInRange:(NSRange)range
          replacementText:(NSString *)text
@@ -281,6 +308,7 @@
     return YES;
 }
 
+//сохранение данных из полей в БД
 -(void) saveDataFromFB
 {
     NSMutableArray *texts = [NSMutableArray array];
@@ -294,6 +322,5 @@
     [db executeUpdate:@"UPDATE FBData SET name=?, surName=?, birthday=?, biography=?, contact=?", names[0], names [1], texts[1], texts[2], texts[3]];
     
 }
-
 
 @end

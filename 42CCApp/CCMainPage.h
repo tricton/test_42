@@ -15,10 +15,13 @@
     Reachability *reachability;
 }
 
+@property (nonatomic) BOOL isFirstLaunch;
+
 -(void) changeViewFrames:(UIInterfaceOrientation) orientation;
 -(void) saveDataFromFB;
 -(NSString *) getPathToDatabase:(NSString *) string;
 -(void) loadDataFromMyPage;
 -(BOOL) isIntenetConnectionAvailable;
+-(void) checkUserChange;
 
 @end

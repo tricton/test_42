@@ -11,6 +11,7 @@
 #import "FMResultSet.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "CCFBLogin.h"
+#import "CCMainPage.h"
 
 @interface CCAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>{
     FBLoginView *loginView;
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) UITabBarController *tabBarController;
 @property (nonatomic, strong) FBSession          *session;
 @property (nonatomic, strong) CCFBLogin          *loginController;
+@property (nonatomic, strong) CCMainPage         *mainPage;
 
 -(void) openLoginApp;
 -(void) closeLoginApp;

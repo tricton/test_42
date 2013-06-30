@@ -7,6 +7,8 @@
 //
 
 #import "CCAboutPage.h"
+#import "CCAppDelegate.h"
+#import "CCMainPage.h"
 
 @interface CCAboutPage ()
 
@@ -30,8 +32,18 @@
     aboutView.tag = 50;
     aboutView.delegate = self;
     aboutView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    NSArray *viewControllers = [appDelegate tabBarController].viewControllers;
+    CCMainPage *main = viewControllers[0];
+    if (main.isFirstLaunch){
+        [self saveAbout];
+    }
     aboutView.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"about"];
     [self.view addSubview:aboutView];
+}
+
+-(void) saveAbout{
+    [[NSUserDefaults standardUserDefaults] setObject:@"Напишите о себе"
+                                              forKey:@"about"];
 }
 
 -(BOOL)         textView:(UITextView *)textView

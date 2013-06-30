@@ -1,13 +1,12 @@
 #import "CCAppDelegate.h"
 #import "CCMe.h"
-#import "CCMainPage.h"
 #import "CCAboutPage.h"
 #import <FacebookSDK/FBSessionTokenCachingStrategy.h>
 #import "FBLoginView+session.h"
 
 @implementation CCAppDelegate
 
-@synthesize tabBarController, session, loginController;
+@synthesize tabBarController, session, loginController, mainPage;
 
 -(BOOL) application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -22,11 +21,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    CCMainPage *mainPage = [[CCMainPage alloc] init];
+    mainPage = [[CCMainPage alloc] init];
     CCAboutPage *aboutPage = [[CCAboutPage alloc] init];
     loginController = [[CCFBLogin alloc] init];
     
-    [self saveAbout];
+//    [self saveAbout];
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.delegate = self;
@@ -53,13 +52,6 @@
     return YES;
 }
 
--(void) saveAbout{
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"about"]){
-        [[NSUserDefaults standardUserDefaults] setObject:@"Напишите о себе"
-                                                  forKey:@"about"];
-    }
-}
-
 - (void)applicationWillResignActive:(UIApplication *)application{
 }
 
@@ -70,19 +62,10 @@
 }
 
 -(void) openLoginApp{
-    NSString *isFirstLaunch = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
-    if ([isFirstLaunch isEqualToString:@"LoadNewData"]){
-        [self.window setRootViewController:tabBarController];
-        [[NSUserDefaults standardUserDefaults] setObject:@"UseOldData"
-                                                  forKey:@"FirstLogInKey"];
-    }else if ([isFirstLaunch isEqualToString:@"UseOldData"]){
-        [self.window setRootViewController:tabBarController];
-    }
+    [self.window setRootViewController:tabBarController];
 }
 
 -(void) closeLoginApp{
-    [[NSUserDefaults standardUserDefaults] setObject:@"LoadNewData"
-                                              forKey:@"FirstLogInKey"];
     [[loginView session] closeAndClearTokenInformation];
     [self.window setRootViewController:loginController];
 }
