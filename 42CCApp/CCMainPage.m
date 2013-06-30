@@ -14,6 +14,8 @@
 
 @implementation CCMainPage
 
+@synthesize reachability, isFirstLaunch;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -42,14 +44,32 @@
     [self.view addSubview:myPhoto];    
     UIInterfaceOrientation orientation = [UIApplication sharedApplication]. statusBarOrientation;
     [self changeViewFrames:orientation];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(putDataToFields)
-                                                 name:@"Download done"
-                                               object:nil];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
+    [self checkUserChange];
     [self loadDataFromMyPage];
+}
+
+//Проверка сменился ли токен пользователя
+-(void) checkUserChange
+{
+    NSString *tokenFileName = [self getPathToDatabase:@"token"];
+    NSDictionary *localToken = [NSDictionary dictionaryWithContentsOfFile:tokenFileName];
+    __block NSString *tokenAsIt = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
+    isFirstLaunch = NO;
+    if ([self isIntenetConnectionAvailable]){
+        FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
+        localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
+        NSString *tokenCompareString = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
+        if (![tokenAsIt isEqualToString:tokenCompareString]){
+            isFirstLaunch = YES;
+        }
+        [localToken writeToFile:tokenFileName
+                     atomically:YES];
+    }else{
+        [self showAlertWithoutInternet];
+    }
 }
 
 -(BOOL) isIntenetConnectionAvailable{
@@ -112,20 +132,8 @@
     [fManager copyItemAtPath:fileFromBundle
                       toPath:workingPath
                        error:nil];
-    [self putDataToFields];
-    NSDictionary *localToken;
-    if ([self isIntenetConnectionAvailable]){
-        FBSessionTokenCachingStrategy *tokenCache = [[FBSessionTokenCachingStrategy alloc] initWithUserDefaultTokenInformationKeyName:nil];
-        localToken = [[tokenCache fetchFBAccessTokenData] dictionary];
-        [localToken writeToFile:[self getPathToDatabase:@"token"]
-                     atomically:YES];
-    }else{
-        [self showAlertWithoutInternet];
-    }
-    __block NSString *token = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
-    NSString *isFirstLaunch = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogInKey"];
-    if ([CCMe myData].myPhoto && [isFirstLaunch isEqualToString:@"UseOldData"]){
-        return;
+    if (self.isFirstLaunch){
+        [self putDataToFields];
     }else{
         FBLoginView *loginView = (FBLoginView *)[[appDelegate loginController].view viewWithTag:30];
         if ([loginView session].isOpen) {
@@ -139,8 +147,10 @@
                 [[FBRequest requestForMe] startWithCompletionHandler:
                  ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
                      if (!error) {
+                         NSDictionary *localToken = [NSDictionary dictionaryWithContentsOfFile:[self getPathToDatabase:@"token"]];
+                         NSString *tokenAsIt = [localToken objectForKey:@"com.facebook.sdk:TokenInformationTokenKey"];
                          [self updateDBwithUserData:user
-                                       andUserToken:token];
+                                       andUserToken:tokenAsIt];
                          [spinner stopAnimating];
                      }
                  }];
@@ -186,8 +196,7 @@
     [db open];
     [db executeUpdate:@"DELETE FROM FBData"];
     [db executeUpdate:@"insert into FBData (name, surName, biography, contact, birthday, photo) values (?,?,?,?,?,?)", name, surName, gender, contact, birth, pic];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Download done"
-                                                        object:nil];
+    [self putDataToFields];
 }
 
 

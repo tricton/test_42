@@ -15,6 +15,7 @@
 		7E5209ED1750A49000BF6701 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5209EC1750A49000BF6701 /* Security.framework */; };
 		7E5209EF1750A49B00BF6701 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5209EE1750A49B00BF6701 /* Social.framework */; };
 		7E5209F41750C6E200BF6701 /* CCFBLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5209F31750C6E200BF6701 /* CCFBLogin.m */; };
+		7E5738BF1780A56C00BC93AF /* CCFriendPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5738BE1780A56C00BC93AF /* CCFriendPage.m */; };
 		7E6B983A17564DC9007DF00E /* About@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6B983917564DC9007DF00E /* About@2x.png */; };
 		7E6B983D175650BB007DF00E /* CCAboutPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6B983C175650BB007DF00E /* CCAboutPage.m */; };
 		7E6B984217565E37007DF00E /* Friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E6B984117565E37007DF00E /* Friends@2x.png */; };
@@ -59,6 +60,8 @@
 		7E5209EE1750A49B00BF6701 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		7E5209F21750C6E200BF6701 /* CCFBLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFBLogin.h; sourceTree = "<group>"; };
 		7E5209F31750C6E200BF6701 /* CCFBLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFBLogin.m; sourceTree = "<group>"; };
+		7E5738BD1780A56C00BC93AF /* CCFriendPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFriendPage.h; sourceTree = "<group>"; };
+		7E5738BE1780A56C00BC93AF /* CCFriendPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFriendPage.m; sourceTree = "<group>"; };
 		7E634B66175285F2003059A9 /* FBProfilePictureView+getImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBProfilePictureView+getImage.h"; sourceTree = "<group>"; };
 		7E634B691753DCA7003059A9 /* FBLoginView+session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBLoginView+session.h"; sourceTree = "<group>"; };
 		7E6B983917564DC9007DF00E /* About@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "About@2x.png"; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 				7E6B983C175650BB007DF00E /* CCAboutPage.m */,
 				7E5209F21750C6E200BF6701 /* CCFBLogin.h */,
 				7E5209F31750C6E200BF6701 /* CCFBLogin.m */,
+				7E5738BD1780A56C00BC93AF /* CCFriendPage.h */,
+				7E5738BE1780A56C00BC93AF /* CCFriendPage.m */,
 				7E634B66175285F2003059A9 /* FBProfilePictureView+getImage.h */,
 				7E634B691753DCA7003059A9 /* FBLoginView+session.h */,
 				7EA84842174DE461006FDB7B /* Supporting Files */,
@@ -368,6 +373,7 @@
 				7E6EFF7F174E214E00833991 /* CCMainPage.m in Sources */,
 				7E5209F41750C6E200BF6701 /* CCFBLogin.m in Sources */,
 				7E6B983D175650BB007DF00E /* CCAboutPage.m in Sources */,
+				7E5738BF1780A56C00BC93AF /* CCFriendPage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

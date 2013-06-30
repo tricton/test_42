@@ -7,12 +7,18 @@
 //
 
 #import "CCAboutPage.h"
+#import "CCMainPage.h"
+#import "CCAppDelegate.h"
 
 @interface CCAboutPage ()
+
+@property (nonatomic, strong) UITextView *aboutView;
 
 @end
 
 @implementation CCAboutPage
+
+@synthesize aboutView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,14 +32,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UITextView *aboutView = [[UITextView alloc] initWithFrame:self.view.bounds];
+    aboutView = [[UITextView alloc] initWithFrame:self.view.bounds];
     aboutView.tag = 50;
     aboutView.delegate = self;
     aboutView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    aboutView.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"about"];
+    NSArray *viewControllers = [appDelegate tabBarController].viewControllers;
+    CCMainPage *main = viewControllers[0];
+    if (main.isFirstLaunch){
+        [self saveAbout];
+    }
     [self.view addSubview:aboutView];
 }
 
+-(void) viewDidAppear:(BOOL)animated
+{
+    aboutView.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"about"];   
+}
+
+-(void) saveAbout{
+    [[NSUserDefaults standardUserDefaults] setObject:@"Напишите о себе"
+                                              forKey:@"about"];
+}
 -(BOOL)         textView:(UITextView *)textView
  shouldChangeTextInRange:(NSRange)range
          replacementText:(NSString *)text{

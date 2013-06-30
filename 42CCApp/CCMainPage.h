@@ -12,8 +12,10 @@
 #import "Reachability.h"
 
 @interface CCMainPage : UIViewController <FBUserSettingsDelegate, UITextViewDelegate, UITextFieldDelegate>{
-    Reachability *reachability;
 }
+
+@property (nonatomic, strong) Reachability *reachability;
+@property (nonatomic)         BOOL          isFirstLaunch;
 
 -(void) changeViewFrames:(UIInterfaceOrientation) orientation;
 -(void) saveDataFromFB;
